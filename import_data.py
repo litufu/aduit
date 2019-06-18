@@ -332,10 +332,72 @@ def save_hs(company_name, start_time, end_time, hs_path):
         session.commit()
 
 
-def check_import_data(start_time, end_time):
+def check_import_data(company_name,start_time, end_time):
+    '''
+    检查科目余额表与序时账是否一致
+    检查科目余额表与辅助核算明细表是否一致
+    :param company_name:
+    :param start_time:
+    :param end_time:
+    :return:
+    '''
+    start_time = datetime.strptime(start_time, '%Y-%m-%d')
+    end_time = datetime.strptime(end_time, '%Y-%m-%d')
+    check_start_end_date(start_time, end_time)
+    year = start_time.year
+    start_month = start_time.month
+    end_month = end_time.month
+    # 获取科目余额表
     df_km = pd.read_sql_table('subjectbalance', engine)
+    df_km = df_km[(df_km['start_time']==start_time) & (df_km['end_time']==end_time) & (df_km['company_name']==company_name) ]
+    # 获取序时账
     df_xsz = pd.read_sql_table('chronologicalaccount', engine)
+    df_xsz = df_xsz[(df_xsz['year'] == year) & (df_xsz['month'] >= start_month) & (df_xsz['month'] <= end_month) & (
+                df_xsz['company_name'] == company_name)]
+    # 获取辅助核算明细表
     df_hs = pd.read_sql_table('auxiliary', engine)
+    df_hs = df_hs[
+        (df_hs['start_time'] == start_time) & (df_hs['end_time'] == end_time) & (df_hs['company_name'] == company_name)]
+    # （1）检查序时账借贷方发生额与科目余额表是否一致
+    # 获取科目余额表借贷方发生额
+    df_km_slim = df_km[['subject_num','debit_amount','credit_amount']]
+    df_km_subject = df_km_slim.set_index('subject_num')
+    # 获取序时账数据透视表，合计为借贷方，索引为科目编码
+    df_xsz_pivot = df_xsz.pivot_table(values=['debit', 'credit'], index='subject_num',  aggfunc='sum')
+    # 合并两个表，并比较发生额是否一致
+    df1 = pd.merge(df_xsz_pivot, df_km_subject, left_index=True, right_index=True, how='left')
+    df1['credit_equal'] = df1['credit'] - df1['credit_amount'] < 0.001
+    df1['debit_equal'] = df1['debit'] - df1['debit_amount'] < 0.001
+    if not df1['credit_equal'].all():
+        raise Exception('贷方合计错误')
+    if not df1['debit_equal'].all():
+        raise Exception('借方合计错误')
+    #  （2）检查辅助核算明细表与科目余额表是否一致
+    #     分别检查期初数/本期借方/本期贷方/期末数是否一致
+    # 获取科目余额表期初数/本期借方/本期贷方/期末数
+    df_km_slim2 = df_km[['subject_num','initial_amount', 'debit_amount', 'credit_amount','terminal_amount']]
+    df_km_subject2 = df_km_slim2.set_index('subject_num')
+    # 获取辅助核算数据透视表，合计为期初期末和借贷方，索引为科目编码
+    df_hs_pivot = df_hs.pivot_table(values=['initial_amount', 'debit_amount','credit_amount','terminal_amount'],
+                                    index=['subject_num','type_num'], aggfunc='sum')
+    # 合并两个表，并比较发生额是否一致
+    df2 = pd.merge(df_hs_pivot, df_km_subject2, left_index=True, right_index=True, how='left')
+    df2['initial_equal'] = df2['initial_amount_x'] - df2['initial_amount_y'] < 0.001
+    if not df2['initial_equal'].all():
+        raise Exception('期初数不一致')
+    df2['credit_equal'] = df2['credit_amount_x'] - df2['credit_amount_y'] < 0.001
+    if not df2['credit_equal'].all():
+        raise Exception('贷方发生额不一致')
+    df2['debit_equal'] = df2['debit_amount_x'] - df2['debit_amount_y'] < 0.001
+    if not df2['debit_equal'].all():
+        raise Exception('借方发生额不一致')
+    df2['terminal_equal'] = df2['terminal_amount_x'] - df2['terminal_amount_y'] < 0.001
+    if not df2['terminal_equal'].all():
+        raise Exception('期末数不一致')
+
+
+
+
 
 
 if __name__ == '__main__':
@@ -344,5 +406,5 @@ if __name__ == '__main__':
     hs_path = './data/zhsx_hs.xlsx'
     # save_km("深圳市众恒世讯科技股份有限公司", start_time="2016-1-1", end_time="2016-12-31", km_path=km_path)
     # save_xsz("深圳市众恒世讯科技股份有限公司",start_time="2016-1-1", end_time="2016-12-31",xsz_path=xsz_path)
-    save_hs("深圳市众恒世讯科技股份有限公司",start_time="2016-1-1", end_time="2016-12-31",hs_path=hs_path)
-    # check_import_data()
+    # save_hs("深圳市众恒世讯科技股份有限公司",start_time="2016-1-1", end_time="2016-12-31",hs_path=hs_path)
+    # check_import_data("深圳市众恒世讯科技股份有限公司",start_time="2016-1-1", end_time="2016-12-31")
