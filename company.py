@@ -180,7 +180,8 @@ def download_company(company_name):
         df = df[df['name'].str.match(company_name)]
         if df.shape[0] > 0:
             print('该公司已经存储')
-            return
+            company = session.query(Company).filter(Company.name==company_name).first()
+            return company
 
     #  没有存储则到企查查爬取
     #  获取详情页页面
@@ -199,14 +200,20 @@ def download_company(company_name):
     except Exception as e:
         print(e)
         logger.info("{}获取公司基本信息失败".format(company_name))
-        return
+        raise Exception("下载公司失败")
     # 获取公司股东信息
     try:
         get_company_holders(soup,company,company_name)
     except Exception as e:
         print(e)
         logger.info("{}获取公司股东信息失败".format(company_name))
-        return
+        raise Exception("下载公司失败")
+
+    companies = session.query(Company).filter(Company.name==company_name).all()
+    if len(companies)>0:
+        return companies[0]
+    else:
+        raise Exception("下载公司失败")
 
 
 
