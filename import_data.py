@@ -396,10 +396,6 @@ def check_import_data(company_name,start_time, end_time):
         raise Exception('期末数不一致')
 
 
-
-
-
-
 if __name__ == '__main__':
     km_path = './data/zhsx_km.xlsx'
     xsz_path = './data/zhsx_xsz.xlsx'
@@ -407,4 +403,4 @@ if __name__ == '__main__':
     # save_km("深圳市众恒世讯科技股份有限公司", start_time="2016-1-1", end_time="2016-12-31", km_path=km_path)
     # save_xsz("深圳市众恒世讯科技股份有限公司",start_time="2016-1-1", end_time="2016-12-31",xsz_path=xsz_path)
     # save_hs("深圳市众恒世讯科技股份有限公司",start_time="2016-1-1", end_time="2016-12-31",hs_path=hs_path)
-    # check_import_data("深圳市众恒世讯科技股份有限公司",start_time="2016-1-1", end_time="2016-12-31")
+    check_import_data("深圳市众恒世讯科技股份有限公司",start_time="2016-1-1", end_time="2016-12-31")

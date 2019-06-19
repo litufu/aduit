@@ -13,6 +13,16 @@ class FSSubject(Base):
     __tablename__ = 'fssubject'
     id = Column(Integer, primary_key=True)
     name = Column(String)
+    show = Column(String)
+    subject = Column(String)
+    direction = Column(String)
+
+class TBSubject(Base):
+    __tablename__ = 'tbsubject'
+    id = Column(Integer, primary_key=True)
+    show = Column(String)
+    subject = Column(String)
+    direction = Column(String)
 
 # 一级会计科目
 class FirstClassSubject(Base):
@@ -132,6 +142,16 @@ class ChronologicalAccount(Base):
     debit_price = Column(Float)
     credit_price = Column(Float)
     auxiliary = Column(String)
+
+class SubjectContrast(Base):
+    __tablename__ = 'subjectcontrast'
+    id = Column(Integer, primary_key=True)
+    origin_subject = Column(String)
+    tb_subject = Column(String)
+    fs_subject = Column(String)
+    coefficient = Column(Integer)
+    direction = Column(String)
+
 
 
 Base.metadata.create_all(engine)

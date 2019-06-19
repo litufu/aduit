@@ -2,25 +2,13 @@
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database import Base,FSSubject,FirstClassSubject,AccountingFirm
+from database import Base,FSSubject,FirstClassSubject,AccountingFirm,SubjectContrast,TBSubject
 import pandas as pd
 import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-#create capabilities
-capabilities = DesiredCapabilities.INTERNETEXPLORER
-
-#delete platform and version keys
-capabilities.pop("platform", None)
-capabilities.pop("version", None)
-
-#start an instance of IE
-driver = webdriver.Ie(executable_path="C:\\Users\\litufu\\IEDriverServer_x64_3.141.0\\IEDriverServer.exe", capabilities=capabilities)
-driver.maximize_window()
-
-
 
 engine = create_engine('sqlite:///audit.sqlite?check_same_thread=False')
 Base.metadata.bind = engine
@@ -29,14 +17,59 @@ session = DBSession()
 
 def add_fs_subject():
     '''
-    添加报表标准项目
+    添加报表标准项目/TB标准科目/科目对照表
     :return:
     '''
-    df = pd.read_csv('./data/fs_subject.csv', header=None)
-    for i in df[0]:
-        subject = FSSubject(name=i)
-        session.add(subject)
-    session.commit()
+    dfs = pd.read_excel('./data/subject_contrast.xlsx',sheet_name=None)
+    for sheet_name in dfs:
+        # 处理科目对照表：科目余额表=》TB=>报表之间的对应关系
+        if sheet_name == "constrast":
+            df = dfs[sheet_name]
+            df = df[["origin",'tb','fs','confidence','direction']]
+            for i in range(len(df)):
+                origin_subject = df.iat[i,0]
+                tb_subject = df.iat[i,1]
+                fs_subject = df.iat[i,2]
+                coefficient = df.iat[i,3]
+                direction = df.iat[i,4]
+                subjectcontrast = SubjectContrast(origin_subject=origin_subject,tb_subject=tb_subject,fs_subject=fs_subject,
+                                coefficient=coefficient,direction=direction
+                                )
+                session.add(subjectcontrast)
+            session.commit()
+        elif sheet_name == "tb":
+            df = dfs[sheet_name]
+            df = df[["tb_show", 'tb_subject', 'direction']]
+            for i in range(len(df)):
+                show = df.iat[i,0]
+                subject = df.iat[i,1]
+                direction = df.iat[i,2]
+                tbsubject = TBSubject(show=show,subject=subject,direction=direction)
+                session.add(tbsubject)
+            session.commit()
+        elif sheet_name == 'fs1':
+            df = dfs[sheet_name]
+            df = df[["fs_show", 'fs_subject', 'direction']]
+            for i in range(len(df)):
+                show = df.iat[i, 0]
+                subject = df.iat[i, 1]
+                direction = df.iat[i, 2]
+                fssubject = FSSubject(name="2019已执行三个新准则",show=show, subject=subject, direction=direction)
+                session.add(fssubject)
+            session.commit()
+        elif sheet_name == 'fs2':
+            df = dfs[sheet_name]
+            df = df[["fs_show", 'fs_subject', 'direction']]
+            for i in range(len(df)):
+                show = df.iat[i, 0]
+                subject = df.iat[i, 1]
+                direction = df.iat[i, 2]
+                fssubject = FSSubject(name="2019未执行三个新准则",show=show, subject=subject, direction=direction)
+                session.add(fssubject)
+            session.commit()
+        else:
+            pass
+
 
 
 def add_first_class_subject():
@@ -51,6 +84,17 @@ def add_first_class_subject():
     session.commit()
 
 def get_account_firm():
+    # create capabilities
+    capabilities = DesiredCapabilities.INTERNETEXPLORER
+
+    # delete platform and version keys
+    capabilities.pop("platform", None)
+    capabilities.pop("version", None)
+    # start an instance of IE
+    driver = webdriver.Ie(executable_path="C:\\Users\\litufu\\IEDriverServer_x64_3.141.0\\IEDriverServer.exe",
+                          capabilities=capabilities)
+    driver.maximize_window()
+
     driver.get("http://cmispub.cicpa.org.cn/cicpa2_web/public/query0/1/00.shtml")
     time.sleep(3)
     driver.switch_to.frame('mainbody')
@@ -88,7 +132,7 @@ def get_account_firm():
 
 
 if __name__ == '__main__':
-    # add_fs_subject()
+    add_fs_subject()
     # add_first_class_subject()
-    get_account_firm()
+    # get_account_firm()
 
