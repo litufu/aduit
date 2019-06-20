@@ -152,6 +152,12 @@ class SubjectContrast(Base):
     coefficient = Column(Integer)
     direction = Column(String)
 
+class Suggestion(Base):
+    __tablename__ = 'suggestion'
+    id = Column(Integer, primary_key=True)
+    kind = Column(String)
+    content = Column(String)
+
 
 
 Base.metadata.create_all(engine)
