@@ -4,6 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database import Base, FSSubject, FirstClassSubject, AccountingFirm, SubjectContrast, TBSubject, Suggestion
 import pandas as pd
+import math
 import json
 import numpy as np
 from datetime import datetime
@@ -33,6 +34,7 @@ def check_start_end_date(start_time, end_time):
     if start_month > end_month:
         raise Exception("开始时间日期截止日期")
 
+
 def append_all_gradation_subjects(df_km, df_xsz):
     '''
     为序时账添加所有级别的会计科目编码和名称
@@ -58,6 +60,7 @@ def append_all_gradation_subjects(df_km, df_xsz):
         df_xsz = df_xsz.drop(columns=['std_subject_num'])
     return df_xsz
 
+
 def get_not_exist_subject_names(df_km):
     '''
     通过比较科目余额表中的一级科目和标准会计科目对照表，检查是否存在未识别的一级会计科目
@@ -76,6 +79,7 @@ def get_not_exist_subject_names(df_km):
     diff_subject_names = set(df_km_first_subject_not_match['subject_name'])
     res_diff_subject_names = diff_subject_names - std_not_match_subject
     return list(res_diff_subject_names)
+
 
 def check_profit_subject_dirction(df_km, df_xsz):
     '''
@@ -153,7 +157,7 @@ def check_profit_subject_dirction(df_km, df_xsz):
                     #    提建议
                     suggestion = Suggestion(kind="会计处理",
                                             content="{}年{}月{}-{}号凭证损益类项目记账不符合规范，建议收入类科目发生时计入贷方，费用类项目发生时计入借方".format(
-                                                obj['year'],obj['month'],obj['vocher_type'],obj['vocher_num']))
+                                                obj['year'], obj['month'], obj['vocher_type'], obj['vocher_num']))
                     session.add(suggestion)
                     session.commit()
                 elif obj['direction'] == "贷" and obj['debit'] > 0:
@@ -182,12 +186,21 @@ def check_profit_subject_dirction(df_km, df_xsz):
     df_xsz_new = df_xsz_new.reset_index()
     return df_xsz_new
 
-def recaculate_km(df_km,df_xsz):
+
+def recaculate_km(df_km, df_xsz):
+    '''
+    :param df_km: 科目余额表
+    :param df_xsz: 序时账
+    :return: 新的科目余额表
+    '''
     # 获取科目余额表期初数
     df_km_new = df_km.copy()
-    df_km_new = df_km_new[["id","company_code","company_name","start_time","end_time","subject_num","subject_name",
-    "subject_type","direction","is_specific","subject_gradation","initial_amount"
-    ]]
+    df_km_new = df_km_new[
+        ["id", "company_code", "company_name", "start_time", "end_time", "subject_num", "subject_name",
+         "subject_type", "direction", "is_specific", "subject_gradation", "initial_amount"
+         ]
+    ]
+
     df_km_new['debit_amount'] = 0.00
     df_km_new['credit_amount'] = 0.00
     df_km_new['terminal_amount'] = 0.00
@@ -202,12 +215,127 @@ def recaculate_km(df_km,df_xsz):
         credit = df_xsz_pivot_tmp['credit'].sum()
         df_km_new.loc[subject_num, "debit_amount"] = debit
         df_km_new.loc[subject_num, "credit_amount"] = credit
-        if df_km_new.loc[subject_num,"direction"] == "借":
-            df_km_new.loc[subject_num, "terminal_amount"] = df_km_new.loc[subject_num, "initial_amount"] + debit - credit
-        elif df_km_new.loc[subject_num,"direction"] == "贷":
+        if df_km_new.loc[subject_num, "direction"] == "借":
+            df_km_new.loc[subject_num, "terminal_amount"] = df_km_new.loc[
+                                                                subject_num, "initial_amount"] + debit - credit
+        elif df_km_new.loc[subject_num, "direction"] == "贷":
             df_km_new.loc[subject_num, "terminal_amount"] = df_km_new.loc[
                                                                 subject_num, "initial_amount"] - debit + credit
+    df_km_new = df_km_new.reset_index()
     return df_km_new
+
+
+def get_bad_debt(df_km):
+    '''
+    bad debts in accounts receivable
+    获取应收账款坏账准备和其他应收款坏账准备期末数
+    :return: (应收账款坏账准备，其他应收款坏账准备)
+    '''
+    df_km_bd = df_km[df_km["subject_name"] == "坏账准备"]
+    if len(df_km_bd) == 1:
+        bad_debt = df_km_bd["terminal_amount"].values[0]
+        # 如果期末金额等于0，
+        if math.isclose(bad_debt, 0.00, rel_tol=1e-5):
+            return 0.00, 0.00
+        else:
+            # 获取坏账准备科目编码
+            bad_debt_subject_num = df_km_bd["subject_num"].values[0]
+            # 获取明细科目
+            df_km_bad_debt = df_km[(df_km["subject_num"].str.startswith(bad_debt_subject_num)) & (
+                        df_km["subject_num"] != bad_debt_subject_num)]
+            df_km_bad_debt_ar = df_km_bad_debt[(df_km_bad_debt["subject_name"].str.contains("应收")) & (
+                ~df_km_bad_debt["subject_name"].str.contains("其他"))]
+            df_km_bad_debt_or = df_km_bad_debt[df_km_bad_debt["subject_name"].str.contains("其他应收")]
+            if len(df_km_bad_debt_ar) == 1:
+                bad_debt_ar = df_km_bad_debt_ar["terminal_amount"].values[0]
+            else:
+                bad_debt_ar = 0.00
+            if len(df_km_bad_debt_or) == 1:
+                bad_debt_or = df_km_bad_debt_or["terminal_amount"].values[0]
+            else:
+                bad_debt_or = 0.00
+            if bad_debt_ar + bad_debt_or == bad_debt:
+                return bad_debt_ar,bad_debt_or
+            else:
+                return bad_debt - bad_debt_or,bad_debt_or
+    else:
+        # 没有设置坏账准备科目
+        return 0.00, 0.00
+
+
+def get_tb(df_km):
+    # 标准科目对照表和标准tb科目表
+
+    df_subject_contrast = pd.read_sql_table('subjectcontrast', engine)
+    df_tb_subject = pd.read_sql_table('tbsubject', engine)
+    df_tb_subject['amount'] = 0.00
+    df_tb = df_tb_subject.set_index("subject")
+
+
+    # 获取坏账准备
+    bad_debt_ar,bad_debt_or = get_bad_debt(df_km)
+
+    # 获取一级科目余额表，用于检查是否存在未识别的一级科目
+    df_km_first_subject = df_km[df_km['subject_gradation'] == 1]
+    df_km_first_subject_not_match = df_km_first_subject[
+        ~df_km_first_subject['subject_name'].isin(df_subject_contrast['origin_subject'])]
+    df_km_first_subject_not_match = df_km_first_subject_not_match.set_index("subject_name")
+
+    df_km_first_subject_match = pd.merge(df_km_first_subject, df_subject_contrast, left_on="subject_name",
+                                         right_on="origin_subject", how="inner")
+    df_km_first_subject_match = df_km_first_subject_match.set_index('tb_subject')
+    # 遍历TB项目
+    for subject in df_tb.index:
+        # 如果subject为空则continue
+        print(subject)
+        if not subject:
+            continue
+        # 如果tb项目在科目余额表中，直接取数
+        elif subject in df_km_first_subject_match.index:
+            print('1')
+            # 如果是资产负债表项目，并且科目余额表方向和TB科目方向一致，则直接取期末数
+            subject_num = df_km_first_subject_match.at[subject, 'subject_num']
+            if not subject_num.startswith('6'):
+                # 判断科目方向是否一致
+                if df_km_first_subject_match.at[subject, 'direction_x'] == df_km_first_subject_match.at[
+                    subject, 'direction_y']:
+                    df_tb.at[subject, "amount"] = df_km_first_subject_match.at[subject, 'terminal_amount']
+                else:
+                    df_tb.at[subject, "amount"] = -df_km_first_subject_match.at[subject, 'terminal_amount']
+            else:
+                # 如果是利润表项目，则取发生额
+                df_tb.at[subject, "amount"] = df_km_first_subject_match.at[subject, 'debit_amount']
+        elif subject == "坏账准备--应收账款":
+            df_tb.at[subject, "amount"] = bad_debt_ar
+        elif subject == "坏账准备--其他应收款":
+            df_tb.at[subject, "amount"] = bad_debt_or
+        elif subject == "年初未分配利润":
+            df_tb.at[subject, "amount"] = df_km_first_subject_not_match.at["利润分配", 'initial_amount'] + \
+                                          df_km_first_subject_not_match.at["本年利润", 'initial_amount']
+
+    # 最后计算公式
+    print('2')
+    # 如果是公式的话，则按照公式进行匹配
+    for subject in df_tb.index:
+
+        if not subject:
+            continue
+        if subject.startswith("%"):
+            print(subject)
+            formula = subject.split("%")
+            formula_items = formula[1:len(formula)-1]
+            formula_str = ""
+            for item in formula_items:
+                print(item)
+                if item in ["+","-","*","/"]:
+                    formula_str = formula_str + item
+                else:
+                    value = df_tb.at[item, "amount"]
+                    formula_str = formula_str + "{}".format(value)
+            df_tb.at[subject, "amount"] = eval(formula_str)
+    print(df_tb)
+
+
 
 
 
@@ -238,9 +366,9 @@ def recalculation(company_name, start_time, end_time):
     # 检查是否所有的损益类项目的核算都正确,不正确则修改序时账
     df_xsz_new = check_profit_subject_dirction(df_km, df_xsz)
     # 根据序时账重新计算科目余额表
-    df_km_new = recaculate_km(df_km,df_xsz_new)
+    df_km_new = recaculate_km(df_km, df_xsz_new)
     # 根据新的科目余额表计算tb
-
+    get_tb(df_km_new)
 
 
 if __name__ == '__main__':

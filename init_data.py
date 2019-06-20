@@ -48,6 +48,7 @@ def add_fs_subject():
                 session.add(tbsubject)
             session.commit()
         elif sheet_name == 'fs1':
+            continue
             df = dfs[sheet_name]
             df = df[["fs_show", 'fs_subject', 'direction']]
             for i in range(len(df)):
@@ -58,6 +59,7 @@ def add_fs_subject():
                 session.add(fssubject)
             session.commit()
         elif sheet_name == 'fs2':
+            continue
             df = dfs[sheet_name]
             df = df[["fs_show", 'fs_subject', 'direction']]
             for i in range(len(df)):

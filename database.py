@@ -158,6 +158,16 @@ class Suggestion(Base):
     kind = Column(String)
     content = Column(String)
 
+class TB(Base):
+    __tablename__ = 'tb'
+    id = Column(Integer, primary_key=True)
+    company_name = Column(String, ForeignKey('company.name'))
+    start_time = Column(DateTime)
+    end_time = Column(DateTime)
+    subject_name = Column(String)
+    direction = Column(String)
+    amount = Column(Float)
+
 
 
 Base.metadata.create_all(engine)
