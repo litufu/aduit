@@ -4,9 +4,9 @@
     <list default="true" id="a08b14b0-2eba-4bec-a73a-1e21d2197d88" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/audit.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/audit.sqlite" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/subject_contrast.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/data/subject_contrast.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/database.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/get_tb.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_tb.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/init_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/init_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tbsubject.xlsx" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,10 +16,10 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/aduit$database.coverage" NAME="database Coverage Results" MODIFIED="1561028883762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/aduit$init_data.coverage" NAME="init_data Coverage Results" MODIFIED="1561046643374" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/aduit$init_data.coverage" NAME="init_data Coverage Results" MODIFIED="1561082720478" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/aduit$import_data.coverage" NAME="import_data Coverage Results" MODIFIED="1560862781736" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/aduit$utils.coverage" NAME="utils Coverage Results" MODIFIED="1560997670874" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/aduit$get_tb.coverage" NAME="get_tb Coverage Results" MODIFIED="1561046949027" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/aduit$get_tb.coverage" NAME="get_tb Coverage Results" MODIFIED="1561112105897" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/aduit$company.coverage" NAME="company Coverage Results" MODIFIED="1560768523996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FUSProjectUsageTrigger">
@@ -28,33 +28,33 @@
         <counts>
           <entry key="project.closed" value="1" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.6" value="2" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.6" value="3" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitignore" value="1" />
-          <entry key="py" value="25" />
+          <entry key="py" value="28" />
           <entry key="txt" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="4" />
-          <entry key="Python" value="25" />
+          <entry key="Python" value="28" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="7" />
-          <entry key="py" value="15489" />
+          <entry key="py" value="20118" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="7" />
-          <entry key="Python" value="15489" />
+          <entry key="Python" value="20118" />
         </counts>
       </usages-collector>
     </session>
@@ -64,24 +64,63 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/get_tb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="323" column="26" selection-start-line="323" selection-start-column="26" selection-end-line="323" selection-end-column="26" />
+            <state relative-caret-position="207">
+              <caret line="592" lean-forward="true" selection-start-line="592" selection-end-line="592" />
               <folding>
                 <element signature="e#24#60#0" expanded="true" />
-                <element signature="e#549#885#0" />
-                <element signature="e#1018#2022#0" />
-                <element signature="e#2009#2912#0" />
-                <element signature="e#2064#2113#1" />
-                <element signature="e#3189#9308#0" />
-                <element signature="e#9445#10893#0" />
-                <element signature="e#10981#12429#0" />
-                <element signature="e#9345#9424#1" />
-                <marker date="1561046780331" expanded="true" signature="3319:3320" ph="..." />
-                <marker date="1561046780331" expanded="true" signature="3319:3324" ph="..." />
-                <marker date="1561046780331" expanded="true" signature="3319:3550" ph="..." />
-                <marker date="1561046780331" expanded="true" signature="9453:15568" ph="..." />
-                <marker date="1561046780331" expanded="true" signature="12524:15568" ph="..." />
-                <marker date="1561046780331" expanded="true" signature="15622:16808" ph="..." />
+                <element signature="e#15328#15542#0" />
+                <element signature="e#15702#15913#0" />
+                <element signature="e#15947#16720#0" />
+                <marker date="1561112515512" expanded="true" signature="3319:3320" ph="..." />
+                <marker date="1561112515512" expanded="true" signature="3319:3324" ph="..." />
+                <marker date="1561112515512" expanded="true" signature="3319:3550" ph="..." />
+                <marker date="1561112515512" expanded="true" signature="12113:12257" ph="..." />
+                <marker date="1561112515512" expanded="true" signature="12281:12286" ph="..." />
+                <marker date="1561112515512" expanded="true" signature="15285:17820" ph="..." />
+                <marker date="1561112515512" expanded="true" signature="18316:23455" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/init_data.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="98">
+              <caret line="36" column="62" selection-start-line="36" selection-start-column="62" selection-end-line="36" selection-end-column="62" />
+              <folding>
+                <element signature="e#24#60#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="135" column="9" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="9" />
+              <folding>
+                <marker date="1561028871292" expanded="true" signature="598:761" ph="..." />
+                <marker date="1561028871292" expanded="true" signature="1369:5321" ph="..." />
+                <marker date="1561028871292" expanded="true" signature="1886:2880" ph="..." />
+                <marker date="1561028871292" expanded="true" signature="2138:2880" ph="..." />
+                <marker date="1561028871292" expanded="true" signature="5029:5321" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/import_data.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="131">
+              <caret line="234" column="47" selection-start-line="234" selection-start-column="44" selection-end-line="234" selection-end-column="47" />
+              <folding>
+                <element signature="e#24#43#0" expanded="true" />
+                <marker date="1560863418557" expanded="true" signature="618:1012" ph="..." />
+                <marker date="1560863418557" expanded="true" signature="668:1012" ph="..." />
+                <marker date="1560863418557" expanded="true" signature="10255:10260" ph="..." />
               </folding>
             </state>
           </provider>
@@ -107,6 +146,9 @@
       <find>本年利润</find>
       <find>str</find>
       <find>set_index</find>
+      <find>借贷方</find>
+      <find>records</find>
+      <find>print(</find>
       <find>rel_tol</find>
     </findStrings>
   </component>
@@ -136,7 +178,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
     <option name="width" value="980" />
     <option name="height" value="1040" />
@@ -333,8 +375,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4989429" visible="true" weight="0.25670242" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4989429" visible="true" weight="0.2600536" />
       <window_info id="Structure" order="1" sideWeight="0.5010571" side_tool="true" weight="0.25670242" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -460,31 +503,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/init_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-122">
-          <caret line="43" column="34" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
-          <folding>
-            <element signature="e#24#60#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/company.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11">
           <caret line="2" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <element signature="e#25#44#0" expanded="true" />
-            <marker date="1560832181793" expanded="true" signature="3430:5344" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/import_data.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="131">
-          <caret line="101" column="112" selection-start-line="101" selection-start-column="100" selection-end-line="101" selection-end-column="112" />
+          <caret line="234" column="47" selection-start-line="234" selection-start-column="44" selection-end-line="234" selection-end-column="47" />
           <folding>
             <element signature="e#24#43#0" expanded="true" />
             <marker date="1560863418557" expanded="true" signature="618:1012" ph="..." />
@@ -496,8 +525,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/database.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="23" column="11" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="11" />
+        <state relative-caret-position="285">
+          <caret line="135" column="9" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="9" />
           <folding>
             <marker date="1561028871292" expanded="true" signature="598:761" ph="..." />
             <marker date="1561028871292" expanded="true" signature="1369:5321" ph="..." />
@@ -508,26 +537,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/get_tb.py">
+    <entry file="file://$PROJECT_DIR$/init_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="323" column="26" selection-start-line="323" selection-start-column="26" selection-end-line="323" selection-end-column="26" />
+        <state relative-caret-position="98">
+          <caret line="36" column="62" selection-start-line="36" selection-start-column="62" selection-end-line="36" selection-end-column="62" />
           <folding>
             <element signature="e#24#60#0" expanded="true" />
-            <element signature="e#549#885#0" />
-            <element signature="e#1018#2022#0" />
-            <element signature="e#2009#2912#0" />
-            <element signature="e#2064#2113#1" />
-            <element signature="e#3189#9308#0" />
-            <element signature="e#9445#10893#0" />
-            <element signature="e#10981#12429#0" />
-            <element signature="e#9345#9424#1" />
-            <marker date="1561046780331" expanded="true" signature="3319:3320" ph="..." />
-            <marker date="1561046780331" expanded="true" signature="3319:3324" ph="..." />
-            <marker date="1561046780331" expanded="true" signature="3319:3550" ph="..." />
-            <marker date="1561046780331" expanded="true" signature="9453:15568" ph="..." />
-            <marker date="1561046780331" expanded="true" signature="12524:15568" ph="..." />
-            <marker date="1561046780331" expanded="true" signature="15622:16808" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/get_tb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="592" lean-forward="true" selection-start-line="592" selection-end-line="592" />
+          <folding>
+            <element signature="e#24#60#0" expanded="true" />
+            <element signature="e#15328#15542#0" />
+            <element signature="e#15702#15913#0" />
+            <element signature="e#15947#16720#0" />
+            <marker date="1561112515512" expanded="true" signature="3319:3320" ph="..." />
+            <marker date="1561112515512" expanded="true" signature="3319:3324" ph="..." />
+            <marker date="1561112515512" expanded="true" signature="3319:3550" ph="..." />
+            <marker date="1561112515512" expanded="true" signature="12113:12257" ph="..." />
+            <marker date="1561112515512" expanded="true" signature="12281:12286" ph="..." />
+            <marker date="1561112515512" expanded="true" signature="15285:17820" ph="..." />
+            <marker date="1561112515512" expanded="true" signature="18316:23455" ph="..." />
           </folding>
         </state>
       </provider>
