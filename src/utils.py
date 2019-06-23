@@ -4,7 +4,7 @@ import json
 import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from src.database import Base
+from src.database import Base,Suggestion
 
 def gen_df_line(df):
     '''
@@ -78,6 +78,89 @@ def get_session_and_engine():
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
     return session,engine
+
+def add_suggestion(kind,content):
+    session,engine = get_session_and_engine()
+    suggestion = Suggestion(kind=kind, content=content)
+    session.add(suggestion)
+    session.commit()
+
+def get_subject_num_by_name(subject_name, df_km):
+    '''
+    根据科目名称获取科目编码，如果没有找到返回None
+    :param subject_name:
+    :param df_km:
+    :return:subject_num
+    '''
+    df_km_subject = df_km[df_km["subject_name"] == subject_name]
+    if len(df_km_subject) == 1:
+        return df_km_subject["subject_num"].values[0]
+    else:
+        return None
+
+def get_subject_num_by_similar_name(subject_name, df_km):
+    '''
+    根据科目名称获取科目编码，如果没有找到返回None
+    :param subject_name:
+    :param df_km:
+    :return:subject_num
+    '''
+    df_km_subject = df_km[df_km["subject_name"].str.contains(subject_name)]
+    if len(df_km_subject) == 1:
+        return df_km_subject["subject_num"].values[0]
+    else:
+        return None
+
+def get_subject_value_by_name(subject_name, df_km, value_type):
+    '''
+    获取科目金额包括期初/借方/贷方/期末,如果没有找到返回0.00
+    :param subject_name:
+    :param df_km:
+    :param value_type:
+    :return:
+    '''
+    if not (value_type in ["initial_amount", "debit_amount", "credit_amount", "terminal_amount"]):
+        raise Exception("value_type必须为initial_amount/debit_amount/credit_amount/terminal_amount之一")
+    df_km_subject = df_km[df_km["subject_name"] == subject_name]
+    if len(df_km_subject) == 1:
+        return df_km_subject[value_type].values[0]
+    else:
+        return 0.00
+
+def get_detail_subject_df(subject_name, df_km):
+    '''
+    获取科目的所有下级科目，
+    :param subject_name:
+    :param df_km:
+    :return:dataFrame
+    '''
+    subject_num = get_subject_num_by_name(subject_name, df_km)
+    if not subject_num:
+        return pd.DataFrame()
+    df = df_km[(df_km["subject_num"].str.startswith(subject_num)) & (
+            df_km["subject_num"] != subject_num)]
+    return df.copy()
+
+def get_xsz_by_subject_num(df_xsz, grade, subject_num):
+    '''
+    获取某个科目编码的所有凭证，包含借贷方
+    :param subject_num:科目编码或科目编码列表
+    :param grade:科目级别
+    :param df_xsz:
+    :return: df
+    '''
+    subject_num_grade = "subject_num_{}".format(grade)
+    if  isinstance(subject_num,str) :
+        df_suject_xsz = df_xsz[df_xsz[subject_num_grade] == subject_num]
+    elif isinstance(subject_num,list):
+        df_suject_xsz = df_xsz[df_xsz[subject_num_grade].isin(subject_num)]
+    else:
+        raise Exception("你必须输入科目编码")
+    df_suject_xsz_record = df_suject_xsz[["month", "vocher_num", "vocher_type"]].drop_duplicates()
+    # 获取完整借贷方凭证
+    df_subject_xsz = pd.merge(df_xsz, df_suject_xsz_record, how="inner",
+                              on=["month", "vocher_num", "vocher_type"])
+    return df_subject_xsz
 
 if __name__ == '__main__':
     str_to_float(np.nan)

@@ -20,9 +20,10 @@ class FSSubject(Base):
 class TBSubject(Base):
     __tablename__ = 'tbsubject'
     id = Column(Integer, primary_key=True)
-    show = Column(String)
+    show = Column(String,unique=True)
     subject = Column(String)
     direction = Column(String)
+    order = Column(Integer)
 
 # 一级会计科目
 class FirstClassSubject(Base):
@@ -146,11 +147,13 @@ class ChronologicalAccount(Base):
 class SubjectContrast(Base):
     __tablename__ = 'subjectcontrast'
     id = Column(Integer, primary_key=True)
-    origin_subject = Column(String)
+    origin_subject = Column(String,unique=True)
     tb_subject = Column(String)
     fs_subject = Column(String)
     coefficient = Column(Integer)
     direction = Column(String)
+    first_class = Column(String)
+    second_class =  Column(String)
 
 class Suggestion(Base):
     __tablename__ = 'suggestion'
@@ -170,5 +173,5 @@ class TB(Base):
 
 
 if __name__ == '__main__':
-    engine = create_engine('sqlite:///aduit.sqlite?check_same_thread=False')
+    engine = create_engine('sqlite:///audit.sqlite?check_same_thread=False')
     Base.metadata.create_all(engine)

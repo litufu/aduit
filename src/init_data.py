@@ -5,47 +5,47 @@ from sqlalchemy.orm import sessionmaker
 from src.database import Base,FSSubject,FirstClassSubject,AccountingFirm,SubjectContrast,TBSubject
 import pandas as pd
 import time
+from src.utils import get_session_and_engine
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
-engine = create_engine('sqlite:///audit.sqlite?check_same_thread=False')
-Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
 
-def add_fs_subject():
+def add_fs_subject(session):
     '''
     添加报表标准项目/TB标准科目/科目对照表
     :return:
     '''
-    dfs = pd.read_excel('./data/subject_contrast.xlsx',sheet_name=None)
+    dfs = pd.read_excel('../data/subject_contrast.xlsx',sheet_name=None)
     for sheet_name in dfs:
         # 处理科目对照表：科目余额表=》TB=>报表之间的对应关系
         if sheet_name == "constrast":
-            continue
             df = dfs[sheet_name]
-            df = df[["origin",'tb','fs','confidence','direction']]
+            df = df[["origin",'tb','fs','confidence','direction','first_class','second_class']]
             for i in range(len(df)):
                 origin_subject = df.iat[i,0]
                 tb_subject = df.iat[i,1]
                 fs_subject = df.iat[i,2]
                 coefficient = df.iat[i,3]
                 direction = df.iat[i,4]
+                first_class = df.iat[i, 5]
+                second_class = df.iat[i, 6]
                 subjectcontrast = SubjectContrast(origin_subject=origin_subject,tb_subject=tb_subject,fs_subject=fs_subject,
-                                coefficient=coefficient,direction=direction
+                                coefficient=coefficient,direction=direction,first_class=first_class,second_class=second_class
                                 )
                 session.add(subjectcontrast)
             session.commit()
         elif sheet_name == "tb":
+            continue
             df = dfs[sheet_name]
-            df = df[["tb_show", 'tb_subject', 'direction']]
+            df = df[["tb_show", 'tb_subject', 'direction','order']]
             for i in range(len(df)):
                 show = df.iat[i,0]
                 subject = df.iat[i,1]
                 direction = df.iat[i,2]
-                tbsubject = TBSubject(show=show,subject=subject,direction=direction)
+                order = int(df.iat[i,3])
+                tbsubject = TBSubject(show=show,subject=subject,direction=direction,order=order)
                 session.add(tbsubject)
             session.commit()
         elif sheet_name == 'fs1':
@@ -75,7 +75,7 @@ def add_fs_subject():
 
 
 
-def add_first_class_subject():
+def add_first_class_subject(session):
     df = pd.read_csv('./data/first_clsss_subject.csv')
     for i in range(len(df)):
         code = str(df.iat[i,0])
@@ -86,7 +86,7 @@ def add_first_class_subject():
         session.add(subject)
     session.commit()
 
-def get_account_firm():
+def get_account_firm(session):
     # create capabilities
     capabilities = DesiredCapabilities.INTERNETEXPLORER
 
@@ -135,7 +135,8 @@ def get_account_firm():
 
 
 if __name__ == '__main__':
-    add_fs_subject()
-    # add_first_class_subject()
-    # get_account_firm()
+    session,engine = get_session_and_engine()
+    add_fs_subject(session)
+    # add_first_class_subject(session)
+    # get_account_firm(session)
 
