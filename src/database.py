@@ -158,6 +158,9 @@ class SubjectContrast(Base):
 class Suggestion(Base):
     __tablename__ = 'suggestion'
     id = Column(Integer, primary_key=True)
+    company_name=Column(String, ForeignKey('company.name'))
+    start_time = Column(DateTime)
+    end_time = Column(DateTime)
     kind = Column(String)
     content = Column(String)
 

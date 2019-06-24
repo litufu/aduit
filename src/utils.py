@@ -79,9 +79,17 @@ def get_session_and_engine():
     session = DBSession()
     return session,engine
 
-def add_suggestion(kind,content):
+def add_suggestion(kind,content,start_time,end_time,company_name):
     session,engine = get_session_and_engine()
-    suggestion = Suggestion(kind=kind, content=content)
+    suggestions = session.query(Suggestion).filter(Suggestion.company_name==company_name,
+                                                   Suggestion.start_time==start_time,
+                                                   Suggestion.end_time == end_time,
+                                                   Suggestion.kind ==kind,
+                                                   Suggestion.content==content
+                                                   ).all()
+    if len(suggestions)>0:
+        return
+    suggestion = Suggestion(company_name=company_name,start_time=start_time,end_time=end_time,kind=kind, content=content)
     session.add(suggestion)
     session.commit()
 
@@ -127,6 +135,22 @@ def get_subject_value_by_name(subject_name, df_km, value_type):
     else:
         return 0.00
 
+def get_subject_value_by_num(subject_num, df_km, value_type):
+    '''
+    获取科目金额包括期初/借方/贷方/期末,如果没有找到返回0.00
+    :param subject_name:
+    :param df_km:
+    :param value_type:
+    :return:
+    '''
+    if not (value_type in ["initial_amount", "debit_amount", "credit_amount", "terminal_amount"]):
+        raise Exception("value_type必须为initial_amount/debit_amount/credit_amount/terminal_amount之一")
+    df_km_subject = df_km[df_km["subject_name"] == subject_num]
+    if len(df_km_subject) == 1:
+        return df_km_subject[value_type].values[0]
+    else:
+        return 0.00
+
 def get_detail_subject_df(subject_name, df_km):
     '''
     获取科目的所有下级科目，
@@ -161,6 +185,25 @@ def get_xsz_by_subject_num(df_xsz, grade, subject_num):
     df_subject_xsz = pd.merge(df_xsz, df_suject_xsz_record, how="inner",
                               on=["month", "vocher_num", "vocher_type"])
     return df_subject_xsz
+
+def get_not_null_df_km(df_km,grade):
+    '''
+    获取非空的科目余额表
+    :param df_km: 科目余额表
+    :param grade: 科目等级
+    :return: 返回期初数/借方/贷方/期末至少有一个不为0的科目余额表
+    '''
+    df_km_not_null = df_km[
+        (df_km['subject_gradation'] == grade) &
+        (
+                (df_km['initial_amount'].abs() > 1e-5) |
+                (df_km['debit_amount'].abs() > 1e-5) |
+                (df_km['credit_amount'].abs() > 1e-5) |
+                (df_km['terminal_amount'].abs() > 1e-5)
+        )
+        ]
+    return df_km_not_null
+
 
 if __name__ == '__main__':
     str_to_float(np.nan)

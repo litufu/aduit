@@ -21,6 +21,7 @@ def add_fs_subject(session):
     for sheet_name in dfs:
         # 处理科目对照表：科目余额表=》TB=>报表之间的对应关系
         if sheet_name == "constrast":
+            continue
             df = dfs[sheet_name]
             df = df[["origin",'tb','fs','confidence','direction','first_class','second_class']]
             for i in range(len(df)):
@@ -37,7 +38,6 @@ def add_fs_subject(session):
                 session.add(subjectcontrast)
             session.commit()
         elif sheet_name == "tb":
-            continue
             df = dfs[sheet_name]
             df = df[["tb_show", 'tb_subject', 'direction','order']]
             for i in range(len(df)):

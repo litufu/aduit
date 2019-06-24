@@ -179,9 +179,9 @@ def save_xsz(company_name, start_time, end_time, xsz_path,session):
         month = str(df.iat[i, 1])
         record_time = str(df.iat[i, 2])
         record_time = datetime.strptime(record_time, '%Y%m%d')
-        vocher_num = str(df.iat[i, 3])
-        vocher_type = df.iat[i, 4]
-        subentry_num = str(df.iat[i, 5])
+        vocher_num = int(df.iat[i, 3])
+        vocher_type = str(df.iat[i, 4])
+        subentry_num = int(df.iat[i, 5])
         description = df.iat[i, 6]
         subject_num = str(df.iat[i, 7])
         subject_name = df.iat[i, 8]
@@ -389,25 +389,26 @@ def check_import_data(company_name,start_time, end_time,engine):
     #  （2）检查辅助核算明细表与科目余额表是否一致
     #     分别检查期初数/本期借方/本期贷方/期末数是否一致
     # 获取科目余额表期初数/本期借方/本期贷方/期末数
-    df_km_slim2 = df_km[['subject_num','initial_amount', 'debit_amount', 'credit_amount','terminal_amount']]
-    df_km_subject2 = df_km_slim2.set_index('subject_num')
-    # 获取辅助核算数据透视表，合计为期初期末和借贷方，索引为科目编码
-    df_hs_pivot = df_hs.pivot_table(values=['initial_amount', 'debit_amount','credit_amount','terminal_amount'],
-                                    index=['subject_num','type_num'], aggfunc='sum')
-    # 合并两个表，并比较发生额是否一致
-    df2 = pd.merge(df_hs_pivot, df_km_subject2, left_index=True, right_index=True, how='left')
-    df2['initial_equal'] = df2['initial_amount_x'] - df2['initial_amount_y'] < 0.001
-    if not df2['initial_equal'].all():
-        raise Exception('期初数不一致')
-    df2['credit_equal'] = df2['credit_amount_x'] - df2['credit_amount_y'] < 0.001
-    if not df2['credit_equal'].all():
-        raise Exception('贷方发生额不一致')
-    df2['debit_equal'] = df2['debit_amount_x'] - df2['debit_amount_y'] < 0.001
-    if not df2['debit_equal'].all():
-        raise Exception('借方发生额不一致')
-    df2['terminal_equal'] = df2['terminal_amount_x'] - df2['terminal_amount_y'] < 0.001
-    if not df2['terminal_equal'].all():
-        raise Exception('期末数不一致')
+    if len(df_hs) > 0:
+        df_km_slim2 = df_km[['subject_num','initial_amount', 'debit_amount', 'credit_amount','terminal_amount']]
+        df_km_subject2 = df_km_slim2.set_index('subject_num')
+        # 获取辅助核算数据透视表，合计为期初期末和借贷方，索引为科目编码
+        df_hs_pivot = df_hs.pivot_table(values=['initial_amount', 'debit_amount','credit_amount','terminal_amount'],
+                                        index=['subject_num','type_num'], aggfunc='sum')
+        # 合并两个表，并比较发生额是否一致
+        df2 = pd.merge(df_hs_pivot, df_km_subject2, left_index=True, right_index=True, how='left')
+        df2['initial_equal'] = df2['initial_amount_x'] - df2['initial_amount_y'] < 0.001
+        if not df2['initial_equal'].all():
+            raise Exception('期初数不一致')
+        df2['credit_equal'] = df2['credit_amount_x'] - df2['credit_amount_y'] < 0.001
+        if not df2['credit_equal'].all():
+            raise Exception('贷方发生额不一致')
+        df2['debit_equal'] = df2['debit_amount_x'] - df2['debit_amount_y'] < 0.001
+        if not df2['debit_equal'].all():
+            raise Exception('借方发生额不一致')
+        df2['terminal_equal'] = df2['terminal_amount_x'] - df2['terminal_amount_y'] < 0.001
+        if not df2['terminal_equal'].all():
+            raise Exception('期末数不一致')
 
     return True
 
