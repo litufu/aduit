@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a08b14b0-2eba-4bec-a73a-1e21d2197d88" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/database.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/get_tb.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/get_tb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tb.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/tb.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,13 +22,13 @@
     <SUITE FILE_PATH="coverage/aduit$pytest_for_test_company_test_download_company.coverage" NAME="pytest for test_company.test_download_company Coverage Results" MODIFIED="1561191512528" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/aduit$pytest_for_test_4_get_tb_test_check_profit_subject_dirction.coverage" NAME="pytest for test_4_get_tb.test_check_profit_subject_dirction Coverage Results" MODIFIED="1561385393870" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/aduit$init_data.coverage" NAME="init_data Coverage Results" MODIFIED="1561368555150" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/aduit$get_tb.coverage" NAME="get_tb Coverage Results" MODIFIED="1561437466937" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/aduit$get_tb.coverage" NAME="get_tb Coverage Results" MODIFIED="1561445262915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/aduit$pytest_in_test_company_py.coverage" NAME="pytest in test_company.py Coverage Results" MODIFIED="1561180459098" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/aduit$pytest_for_test_get_tb_test_recaculate_km.coverage" NAME="pytest for test_get_tb.test_recaculate_km Coverage Results" MODIFIED="1561274585981" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/aduit$pytest_for_test_import_data_test_save_km.coverage" NAME="pytest for test_import_data.test_save_km Coverage Results" MODIFIED="1561189529497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/aduit$pytest_in_test_utils_py.coverage" NAME="pytest in test_utils.py Coverage Results" MODIFIED="1561189019053" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/aduit$company.coverage" NAME="company Coverage Results" MODIFIED="1561191696572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/aduit$pytest_in_test_4_get_tb_py.coverage" NAME="pytest in test_4_get_tb.py Coverage Results" MODIFIED="1561385547254" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/aduit$pytest_in_test_4_get_tb_py.coverage" NAME="pytest in test_4_get_tb.py Coverage Results" MODIFIED="1561446185586" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/aduit$database.coverage" NAME="database Coverage Results" MODIFIED="1561374932756" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/aduit$utils__1_.coverage" NAME="utils (1) Coverage Results" MODIFIED="1561189400792" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/aduit$pytest_for_test_utils_test_str_to_float.coverage" NAME="pytest for test_utils.test_str_to_float Coverage Results" MODIFIED="1561188666748" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
@@ -44,7 +42,7 @@
     <SUITE FILE_PATH="coverage/aduit$import_data.coverage" NAME="import_data Coverage Results" MODIFIED="1560862781736" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/aduit$utils.coverage" NAME="utils Coverage Results" MODIFIED="1561384845753" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/aduit$pytest_in_test_5_limin_py.coverage" NAME="pytest in test_5_limin.py Coverage Results" MODIFIED="1561437563679" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/aduit$pytest_for_test_4_get_tb_test_get_tb.coverage" NAME="pytest for test_4_get_tb.test_get_tb Coverage Results" MODIFIED="1561283991055" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/aduit$pytest_for_test_4_get_tb_test_get_tb.coverage" NAME="pytest for test_4_get_tb.test_get_tb Coverage Results" MODIFIED="1561446053117" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/aduit$pytest_for_test_5_limin_test_main.coverage" NAME="pytest for test_5_limin.test_main Coverage Results" MODIFIED="1561438582836" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/aduit$pytest_for_test_get_tb_test_check_profit_subject_dirction.coverage" NAME="pytest for test_get_tb.test_check_profit_subject_dirction Coverage Results" MODIFIED="1561271730034" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>
@@ -78,43 +76,116 @@
         <counts>
           <entry key="csv" value="3" />
           <entry key="gitignore" value="3" />
-          <entry key="py" value="136" />
+          <entry key="py" value="147" />
           <entry key="txt" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="11" />
-          <entry key="Python" value="136" />
+          <entry key="Python" value="147" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="40" />
           <entry key="gitignore" value="7" />
-          <entry key="py" value="33222" />
+          <entry key="py" value="34079" />
           <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="48" />
-          <entry key="Python" value="33222" />
+          <entry key="Python" value="34079" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_4_get_tb.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-76">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#729#1600#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_3_import_data.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_2_company.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="132">
+              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_1_utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="6" column="12" lean-forward="true" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_5_limin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="307">
+              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+                <marker date="1561443976147" expanded="true" signature="432:433" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="122">
+              <caret line="220" selection-start-line="220" selection-end-line="220" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+                <marker date="1561446214720" expanded="true" signature="316:320" ph="..." />
+                <marker date="1561446214720" expanded="true" signature="2044:8219" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/get_tb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="777" column="54" selection-start-line="777" selection-start-column="54" selection-end-line="777" selection-end-column="54" />
+            <state relative-caret-position="165">
+              <caret line="921" column="39" selection-start-line="921" selection-start-column="39" selection-end-line="921" selection-end-column="39" />
               <folding>
                 <element signature="e#24#43#0" expanded="true" />
-                <marker date="1561438558625" expanded="true" signature="21493:22602" ph="..." />
-                <marker date="1561438558625" expanded="true" signature="30613:31284" ph="..." />
+                <marker date="1561445743592" expanded="true" signature="21513:22622" ph="..." />
+                <marker date="1561445743592" expanded="true" signature="30633:31304" ph="..." />
               </folding>
             </state>
           </provider>
@@ -199,12 +270,12 @@
         <option value="$PROJECT_DIR$/src/init_data.py" />
         <option value="$PROJECT_DIR$/src/main.py" />
         <option value="$PROJECT_DIR$/tests/database.py" />
+        <option value="$PROJECT_DIR$/src/database.py" />
+        <option value="$PROJECT_DIR$/tests/test_5_limin.py" />
+        <option value="$PROJECT_DIR$/src/get_tb.py" />
         <option value="$PROJECT_DIR$/tests/utils.py" />
         <option value="$PROJECT_DIR$/tests/test_4_get_tb.py" />
-        <option value="$PROJECT_DIR$/tests/test_5_limin.py" />
-        <option value="$PROJECT_DIR$/src/database.py" />
         <option value="$PROJECT_DIR$/src/utils.py" />
-        <option value="$PROJECT_DIR$/src/get_tb.py" />
       </list>
     </option>
   </component>
@@ -279,7 +350,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.pytest for test_5_limin.test_main">
+  <component name="RunManager" selected="Python tests.pytest in test_4_get_tb.py">
     <configuration name="get_tb" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="aduit" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -302,7 +373,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for test_4_get_tb.test_recaculate_km" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for test_4_get_tb.test_get_tb" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="aduit" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -314,7 +385,7 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_4_get_tb.test_recaculate_km&quot;" />
+      <option name="_new_target" value="&quot;test_4_get_tb.test_get_tb&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -367,19 +438,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python tests.pytest for test_4_get_tb.test_recaculate_km" />
-      <item itemvalue="Python tests.pytest in test_4_get_tb.py" />
       <item itemvalue="Python tests.pytest in test_5_limin.py" />
       <item itemvalue="Python tests.pytest for test_5_limin.test_main" />
       <item itemvalue="Python.get_tb" />
+      <item itemvalue="Python tests.pytest for test_4_get_tb.test_get_tb" />
+      <item itemvalue="Python tests.pytest in test_4_get_tb.py" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.pytest in test_4_get_tb.py" />
+        <item itemvalue="Python tests.pytest for test_4_get_tb.test_get_tb" />
+        <item itemvalue="Python.get_tb" />
         <item itemvalue="Python tests.pytest for test_5_limin.test_main" />
         <item itemvalue="Python tests.pytest in test_5_limin.py" />
-        <item itemvalue="Python.get_tb" />
-        <item itemvalue="Python tests.pytest for test_4_get_tb.test_recaculate_km" />
-        <item itemvalue="Python tests.pytest in test_4_get_tb.py" />
       </list>
     </recent_temporary>
   </component>
@@ -397,35 +468,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="pytest_for_test_4_get_tb_test_append_all_gradation_subjects - 2019.06.23 at 18h 02m 19s.xml">
-      <configuration name="pytest for test_4_get_tb.test_append_all_gradation_subjects" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_4_get_tb_test_check_profit_subject_dirction - 2019.06.24 at 22h 09m 56s.xml">
-      <configuration name="pytest for test_4_get_tb.test_check_profit_subject_dirction" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_4_get_tb_test_recaculate_km - 2019.06.24 at 22h 10m 12s.xml">
-      <configuration name="pytest for test_4_get_tb.test_recaculate_km" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_in_test_4_get_tb_py - 2019.06.24 at 22h 12m 30s.xml">
-      <configuration name="pytest in test_4_get_tb.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_4_get_tb_test_recaculate_km - 2019.06.24 at 22h 19m 16s.xml">
-      <configuration name="pytest for test_4_get_tb.test_recaculate_km" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_in_test_5_limin_py - 2019.06.24 at 22h 26m 05s.xml">
-      <configuration name="pytest in test_5_limin.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_in_test_5_limin_py - 2019.06.24 at 22h 27m 00s.xml">
-      <configuration name="pytest in test_5_limin.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_in_test_5_limin_py - 2019.06.24 at 22h 27m 28s.xml">
-      <configuration name="pytest in test_5_limin.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_5_limin_test_main - 2019.06.24 at 22h 29m 51s.xml">
-      <configuration name="pytest for test_5_limin.test_main" configurationId="tests" />
-    </history-entry>
     <history-entry file="pytest_in_test_5_limin_py - 2019.06.25 at 12h 39m 43s.xml">
       <configuration name="pytest in test_5_limin.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_5_limin_test_main - 2019.06.25 at 12h 56m 42s.xml">
+      <configuration name="pytest for test_5_limin.test_main" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_4_get_tb_test_get_tb - 2019.06.25 at 14h 26m 28s.xml">
+      <configuration name="pytest for test_4_get_tb.test_get_tb" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_in_test_4_get_tb_py - 2019.06.25 at 14h 48m 56s.xml">
+      <configuration name="pytest in test_4_get_tb.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_4_get_tb_test_get_tb - 2019.06.25 at 14h 55m 53s.xml">
+      <configuration name="pytest for test_4_get_tb.test_get_tb" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_in_test_4_get_tb_py - 2019.06.25 at 14h 58m 18s.xml">
+      <configuration name="pytest in test_4_get_tb.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_in_test_4_get_tb_py - 2019.06.25 at 14h 58m 42s.xml">
+      <configuration name="pytest in test_4_get_tb.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_4_get_tb_test_get_tb - 2019.06.25 at 15h 00m 49s.xml">
+      <configuration name="pytest for test_4_get_tb.test_get_tb" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_4_get_tb_test_get_tb - 2019.06.25 at 15h 00m 57s.xml">
+      <configuration name="pytest for test_4_get_tb.test_get_tb" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_in_test_4_get_tb_py - 2019.06.25 at 15h 03m 11s.xml">
+      <configuration name="pytest in test_4_get_tb.py" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -446,7 +517,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -552,31 +623,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/new.csv" />
-    <entry file="file://$PROJECT_DIR$/tests/test_2_company.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="38" lean-forward="true" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/pandas/core/generic.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="148">
           <caret line="5066" selection-start-line="5066" selection-end-line="5066" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_3_import_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_1_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="31" column="34" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -605,6 +655,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="817">
           <caret line="186" column="35" selection-start-line="186" selection-start-column="35" selection-end-line="186" selection-end-column="35" />
+          <folding>
+            <element signature="e#24#43#0" expanded="true" />
+            <marker date="1561344799825" expanded="true" signature="10203:10208" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -622,17 +676,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="83" selection-start-line="83" selection-end-line="83" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/database.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="170" column="33" selection-start-line="170" selection-start-column="33" selection-end-line="170" selection-end-column="33" />
+          <folding>
+            <element signature="e#24#120#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -640,13 +690,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1280">
           <caret line="205" column="24" selection-start-line="205" selection-end-line="206" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_4_get_tb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1235">
-          <caret line="81" column="45" selection-start-line="81" selection-start-column="45" selection-end-line="81" selection-end-column="45" />
+          <folding>
+            <element signature="e#24#43#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -675,37 +721,86 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils.py">
+    <entry file="file://$PROJECT_DIR$/src/get_tb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="207" column="18" selection-start-line="207" selection-start-column="6" selection-end-line="207" selection-end-column="18" />
+        <state relative-caret-position="165">
+          <caret line="921" column="39" selection-start-line="921" selection-start-column="39" selection-end-line="921" selection-end-column="39" />
           <folding>
-            <element signature="e#0#19#0" expanded="true" />
-            <marker date="1561426793362" expanded="true" signature="316:320" ph="..." />
-            <marker date="1561426793362" expanded="true" signature="2044:6656" ph="..." />
+            <element signature="e#24#43#0" expanded="true" />
+            <marker date="1561445743592" expanded="true" signature="21513:22622" ph="..." />
+            <marker date="1561445743592" expanded="true" signature="30633:31304" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_3_import_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_2_company.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_1_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="12" lean-forward="true" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_4_get_tb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-76">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#729#1600#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="85" selection-start-line="85" selection-end-line="85" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+            <marker date="1561446148017" expanded="true" signature="3567:3570" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_5_limin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="24" column="88" selection-start-line="24" selection-start-column="88" selection-end-line="24" selection-end-column="88" />
+        <state relative-caret-position="307">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <marker date="1561386570038" expanded="true" signature="432:433" ph="..." />
+            <marker date="1561443976147" expanded="true" signature="432:433" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/get_tb.py">
+    <entry file="file://$PROJECT_DIR$/src/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="777" column="54" selection-start-line="777" selection-start-column="54" selection-end-line="777" selection-end-column="54" />
+        <state relative-caret-position="122">
+          <caret line="220" selection-start-line="220" selection-end-line="220" />
           <folding>
-            <element signature="e#24#43#0" expanded="true" />
-            <marker date="1561438558625" expanded="true" signature="21493:22602" ph="..." />
-            <marker date="1561438558625" expanded="true" signature="30613:31284" ph="..." />
+            <element signature="e#0#19#0" expanded="true" />
+            <marker date="1561446214720" expanded="true" signature="316:320" ph="..." />
+            <marker date="1561446214720" expanded="true" signature="2044:8219" ph="..." />
           </folding>
         </state>
       </provider>

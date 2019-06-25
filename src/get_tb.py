@@ -7,7 +7,7 @@ from datetime import datetime
 from src.database import SubjectContrast, TBSubject
 from src.utils import gen_df_line, check_start_end_date, get_session_and_engine, \
     get_subject_num_by_name, get_subject_value_by_name, get_detail_subject_df, get_xsz_by_subject_num, \
-    get_subject_num_by_similar_name, get_not_null_df_km, get_subject_value_by_num,CJsonEncoder
+    get_subject_num_by_similar_name, get_not_null_df_km, get_subject_value_by_num,CJsonEncoder,get_tb_origin_value
 
 
 # 通过科目余额表和序时账生成TB
@@ -919,6 +919,7 @@ def get_tb(df_km, df_xsz, engine, add_suggestion,start_time,end_time,company_nam
     total_assets = df_tb[df_tb["show"].str.strip() == "资产总计"]["amount"].values[0]
     liabilities_and_shareholders_equity = df_tb[df_tb["show"].str.strip() == "负债和股东权益总计"]["amount"].values[0]
     df_tb = df_tb.sort_values(by="order")
+    df_tb.to_csv('tb.csv',encoding="gbk")
     if math.isclose(total_assets, liabilities_and_shareholders_equity, rel_tol=1e-5):
         return df_tb
     else:
@@ -1008,9 +1009,13 @@ def recalculation(company_name, start_time, end_time, engine, add_suggestion, se
     # 根据序时账重新计算科目余额表
     df_km_new = recaculate_km(df_km, df_xsz_new)
     # 根据新的科目余额表计算tb
-    tb = get_tb(df_km_new, df_xsz_new, engine, add_suggestion,start_time, end_time,company_name)
-    tb.to_csv("tb.csv",encoding="gbk")
-    return tb
+    df_tb = get_tb(df_km_new, df_xsz_new, engine, add_suggestion,start_time, end_time,company_name)
+    for obj in gen_df_line(df_tb):
+        if obj["origin"]:
+            value = get_tb_origin_value(obj["origin"],df_km_new,df_xsz_new)
+            if not math.isclose(obj["amount"] ,value,rel_tol=1e-5):
+                raise Exception("数值来源计算错误")
+    return df_tb
 
 
 if __name__ == '__main__':

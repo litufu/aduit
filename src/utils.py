@@ -145,7 +145,7 @@ def get_subject_value_by_num(subject_num, df_km, value_type):
     '''
     if not (value_type in ["initial_amount", "debit_amount", "credit_amount", "terminal_amount"]):
         raise Exception("value_type必须为initial_amount/debit_amount/credit_amount/terminal_amount之一")
-    df_km_subject = df_km[df_km["subject_name"] == subject_num]
+    df_km_subject = df_km[df_km["subject_num"] == subject_num]
     if len(df_km_subject) == 1:
         return df_km_subject[value_type].values[0]
     else:
@@ -215,6 +215,36 @@ class CJsonEncoder(json.JSONEncoder):
         else:
             return json.JSONEncoder.default(self, obj)
 
+def get_tb_origin_value(origin_text,df_km_new,df_xsz_new,):
+    if origin_text:
+        origins = json.loads(origin_text)
+        sum_value = 0.00
+        for origin in origins:
+            if origin["table_name"] == "km":
+                subject_num = origin["values"]["location"]["subject_num"]
+                value_type = origin["values"]["value_type"]
+                if origin["values"]["sign"] == "+":
+                    value = get_subject_value_by_num(subject_num,df_km_new,value_type)
+                else:
+                    value = -get_subject_value_by_num(subject_num,df_km_new,value_type)
+            elif origin["table_name"] == "xsz":
+                month = origin["values"]["location"]["month"]
+                vocher_type = origin["values"]["location"]["vocher_type"]
+                vocher_num = origin["values"]["location"]["vocher_num"]
+                subentry_num = origin["values"]["location"]["subentry_num"]
+                value_type = origin["values"]["value_type"]
+                origin_value = df_xsz_new[(df_xsz_new["month"]==month) &
+                           (df_xsz_new["vocher_type"]==vocher_type) &
+                           (df_xsz_new["vocher_num"] == vocher_num) &
+                           (df_xsz_new["subentry_num"] == subentry_num)
+                ][value_type].values[0]
+                if origin["values"]["sign"] == "+":
+                    value = origin_value
+                else:
+                    value = - origin_value
+            sum_value = sum_value + value
+        return sum_value
+    return 0.00
 
 if __name__ == '__main__':
     str_to_float(np.nan)
