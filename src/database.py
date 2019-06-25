@@ -173,6 +173,7 @@ class TB(Base):
     subject_name = Column(String)
     direction = Column(String)
     amount = Column(Numeric(20,4))
+    origin = Column(String)
 
 
 if __name__ == '__main__':

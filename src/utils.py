@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import json
-import datetime
+from datetime import datetime,date
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from src.database import Base,Suggestion
@@ -55,9 +55,9 @@ def check_start_end_date(start_time, end_time):
     :param end_time:
     :return:
     '''
-    if not isinstance(start_time, datetime.datetime):
+    if not isinstance(start_time, datetime):
         raise Exception("起始日期类型错误")
-    if not isinstance(end_time, datetime.datetime):
+    if not isinstance(end_time, datetime):
         raise Exception("截至日期类型错误")
 
     start_year = start_time.year
@@ -203,6 +203,17 @@ def get_not_null_df_km(df_km,grade):
         )
         ]
     return df_km_not_null
+
+
+class CJsonEncoder(json.JSONEncoder):
+
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return obj.strftime('%Y-%m-%d')
+        elif isinstance(obj, date):
+            return obj.strftime('%Y-%m-%d')
+        else:
+            return json.JSONEncoder.default(self, obj)
 
 
 if __name__ == '__main__':
