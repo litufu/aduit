@@ -175,6 +175,16 @@ class TB(Base):
     amount = Column(Numeric(20,4))
     origin = Column(String)
 
+class EntryClassify(Base):
+    __tablename__ = 'entryclassify'
+    id = Column(Integer, primary_key=True)
+    company_name = Column(String, ForeignKey('company.name'))
+    start_time = Column(DateTime)
+    end_time = Column(DateTime)
+    desc = Column(String)
+    number = Column(Integer)
+    records = Column(String)
+
 
 if __name__ == '__main__':
     engine = create_engine('sqlite:///audit.sqlite?check_same_thread=False')

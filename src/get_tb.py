@@ -22,11 +22,9 @@ def modify_tb(show, add_subject_name, sign, session):
     obj_subject = obj.subject
     obj.subject = obj_subject + "{}%{}%".format(sign, add_subject_name)
 
-
 def modify_all_tb(shows, add_subject_name, sign, session):
     for show in shows:
         modify_tb(show, add_subject_name, sign, session)
-
 
 def add_std_not_exist_subject(df_km, df_std, session):
     '''
@@ -212,7 +210,6 @@ def add_std_not_exist_subject(df_km, df_std, session):
         session.add(tbsubject)
         session.commit()
 
-
 def append_all_gradation_subjects(df_km, df_xsz):
     '''
     为序时账添加所有级别的会计科目编码和名称
@@ -240,7 +237,6 @@ def append_all_gradation_subjects(df_km, df_xsz):
                           suffixes=('', '_{}'.format(i + 1)))
         df_xsz = df_xsz.drop(columns=['std_subject_num'])
     return df_xsz
-
 
 def check_profit_subject_dirction(df_km, df_xsz, engine, add_suggestion,start_time,end_time,company_name):
     '''
@@ -348,7 +344,6 @@ def check_profit_subject_dirction(df_km, df_xsz, engine, add_suggestion,start_ti
     df_xsz_new = df_xsz_new.reset_index()
     return df_xsz_new
 
-
 def recaculate_km(df_km, df_xsz):
     '''
     :param df_km: 科目余额表
@@ -400,7 +395,6 @@ def recaculate_km(df_km, df_xsz):
     df_km_new = df_km_new.reset_index()
     return df_km_new
 
-
 def get_bad_debt_value_and_origin(start_time, end_time, company_name,df_one_line):
     location = {"subject_num": df_one_line["subject_num"].values[0],
                 "subject_name": df_one_line["subject_name"].values[0]}
@@ -424,6 +418,7 @@ def get_bad_debt_value_and_origin(start_time, end_time, company_name,df_one_line
             data_origin = get_origin(start_time, end_time, company_name, "km", "+", location, "terminal_amount")
             data_origins = [data_origin]
             origin = json.dumps(data_origins, ensure_ascii=False, cls=CJsonEncoder)
+
     return value,origin
 
 def get_bad_debt(df_km, add_suggestion,start_time,end_time,company_name):
@@ -480,7 +475,6 @@ def get_bad_debt(df_km, add_suggestion,start_time,end_time,company_name):
             bad_debt_ar["value"] = value
             bad_debt_ar["origin"] = origin
             return bad_debt_ar, bad_debt_or
-
 
 def get_df_km_occurrence_value_and_origin(start_time, end_time, company_name,df_one_line,direction):
     location = {"subject_num": df_one_line["subject_num"].values[0],
@@ -605,6 +599,8 @@ def get_profit_distribution_xsz_origin(start_time, end_time, company_name,df):
         data_origins.append(data_origin_2)
     origin = json.dumps(data_origins, ensure_ascii=False, cls=CJsonEncoder)
     return origin
+
+
 
 
 def get_profit_distribution(df_km, df_xsz, add_suggestion,start_time,end_time,company_name):
@@ -782,7 +778,6 @@ def get_profit_distribution(df_km, df_xsz, add_suggestion,start_time,end_time,co
     result = [convert_to_capital, preferred_dividend, dividend, adjustment_profit, *reserves]
     return tuple(result)
 
-
 def parse_df_tb_subject_formula(df_tb, subject):
     '''
     解析TBsubject中的公式，按照公式计算出值
@@ -800,7 +795,6 @@ def parse_df_tb_subject_formula(df_tb, subject):
             value = df_tb.at[item, "amount"]
             formula_str = formula_str + "{}".format(value)
     return eval(formula_str)
-
 
 def get_tb(df_km, df_xsz, engine, add_suggestion,start_time,end_time,company_name):
     '''
@@ -919,12 +913,10 @@ def get_tb(df_km, df_xsz, engine, add_suggestion,start_time,end_time,company_nam
     total_assets = df_tb[df_tb["show"].str.strip() == "资产总计"]["amount"].values[0]
     liabilities_and_shareholders_equity = df_tb[df_tb["show"].str.strip() == "负债和股东权益总计"]["amount"].values[0]
     df_tb = df_tb.sort_values(by="order")
-    df_tb.to_csv('tb.csv',encoding="gbk")
     if math.isclose(total_assets, liabilities_and_shareholders_equity, rel_tol=1e-5):
         return df_tb
     else:
         raise Exception("试算平衡表不平，请重新检查")
-
 
 def get_origin(start_time,end_time,company_name,table_name,value_sign,value_location,value_type):
     '''
@@ -980,9 +972,17 @@ def get_origin(start_time,end_time,company_name,table_name,value_sign,value_loca
     }
     return origin
 
-
-
-def recalculation(company_name, start_time, end_time, engine, add_suggestion, session):
+def get_new_km_xsz_df(company_name, start_time, end_time, engine, add_suggestion, session):
+    '''
+    获取新的科目余额表和序时账
+    :param company_name: 公司名称
+    :param start_time: 2018-1-1
+    :param end_time: 2018-12-31
+    :param engine: 数据库engine
+    :param add_suggestion: 添加建议
+    :param session: 数据库session
+    :return: df_km_new,df_xsz_new
+    '''
     # 处理起止时间
     start_time = datetime.strptime(start_time, '%Y-%m-%d')
     end_time = datetime.strptime(end_time, '%Y-%m-%d')
@@ -1005,9 +1005,14 @@ def recalculation(company_name, start_time, end_time, engine, add_suggestion, se
     # 为序时账添加所有级别的会计科目编码和名称
     df_xsz = append_all_gradation_subjects(df_km, df_xsz)
     # 检查是否所有的损益类项目的核算都正确,不正确则修改序时账
-    df_xsz_new = check_profit_subject_dirction(df_km, df_xsz, engine, add_suggestion,start_time, end_time,company_name)
+    df_xsz_new = check_profit_subject_dirction(df_km, df_xsz, engine, add_suggestion, start_time, end_time,
+                                               company_name)
     # 根据序时账重新计算科目余额表
     df_km_new = recaculate_km(df_km, df_xsz_new)
+    return df_km_new,df_xsz_new
+
+def recalculation(company_name, start_time, end_time, engine, add_suggestion, session):
+    df_km_new ,df_xsz_new= get_new_km_xsz_df(company_name, start_time, end_time, engine, add_suggestion, session)
     # 根据新的科目余额表计算tb
     df_tb = get_tb(df_km_new, df_xsz_new, engine, add_suggestion,start_time, end_time,company_name)
     for obj in gen_df_line(df_tb):
