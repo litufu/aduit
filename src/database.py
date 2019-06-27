@@ -155,6 +155,13 @@ class SubjectContrast(Base):
     first_class = Column(String)
     second_class =  Column(String)
 
+class CashContrast(Base):
+    __tablename__ = 'cashcontrast'
+    id = Column(Integer, primary_key=True)
+    origin_subject = Column(String,unique=True)
+    cash_subject = Column(String)
+
+
 class Suggestion(Base):
     __tablename__ = 'suggestion'
     id = Column(Integer, primary_key=True)
@@ -181,6 +188,7 @@ class EntryClassify(Base):
     company_name = Column(String, ForeignKey('company.name'))
     start_time = Column(DateTime)
     end_time = Column(DateTime)
+    step = Column(Integer)
     desc = Column(String)
     number = Column(Integer)
     records = Column(String)
