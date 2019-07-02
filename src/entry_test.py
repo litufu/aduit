@@ -5,7 +5,36 @@ from datetime import datetime
 from src.database import EntryClassify
 from src.get_tb  import get_new_km_xsz_df
 from src.utils import gen_df_line,  get_session_and_engine,parse_auxiliary
+from settings.constant import inventory,long_term_assets,expense
 
+def get_account_nature(df_xsz,name):
+    '''
+    从本年度序时账获取供应商款项性质
+    :param df_xsz: 序时账
+    :param name: 
+    :return: 
+    '''
+    df_tmp_xsz = df_xsz[
+        (df_xsz["auxiliary"].str.contains(name)) & (df_xsz["credit"].abs() > 0)]
+    if len(df_tmp_xsz) > 0:
+        for obj in gen_df_line(df_tmp_xsz[:1]):
+            df_supplier_xsz = df_xsz[
+                (df_xsz["month"] == obj["month"]) &
+                (df_xsz["vocher_type"] == obj["vocher_type"]) &
+                (df_xsz["vocher_num"] == obj["vocher_num"]) &
+                (df_xsz["debit"].abs() > 0)
+                ]
+            for i in long_term_assets:
+                if df_supplier_xsz["subject_name_1"].str.contains(i).any():
+                    return "长期资产"
+            for i in inventory:
+                if df_supplier_xsz["subject_name_1"].str.contains(i).any():
+                    return "材料费"
+            for i in expense:
+                if df_supplier_xsz["subject_name_1"].str.contains(i).any():
+                    return "费用"
+    return "材料费"
+                   
 
 def add_event(company_name,start_time,end_time,session,engine,add_suggestion):
     # 获取科目余额表和序时账
@@ -35,12 +64,16 @@ def add_event(company_name,start_time,end_time,session,engine,add_suggestion):
             continue
         # 处理收入确认凭证
         if df_tmp["tb_subject"].str.contains("主营业务收入").any():
+            if df_tmp[(df_tmp["tb_subject"]=="主营业务收入") &(df_tmp["direction"]=="借")]:
+                raise Exception("主营业务收入在借方")
             df_xsz_new.loc[
                 (record['month'], record['vocher_type'], record['vocher_num']),
                 'event'] = "确认主营业务收入"
             continue
 
         if df_tmp["tb_subject"].str.contains("其他业务收入").any():
+            if df_tmp[(df_tmp["tb_subject"]=="其他业务收入") &(df_tmp["direction"]=="借")]:
+                raise Exception("其他业务收入在借方")
             df_xsz_new.loc[
                 (record['month'], record['vocher_type'], record['vocher_num']),
                 'event'] = "确认其他业务收入"
@@ -61,7 +94,7 @@ def add_event(company_name,start_time,end_time,session,engine,add_suggestion):
                         pass
 
 
-        if df_tmp["subject_name_1"].str.contains("其他业务收入").any():
+        if df_tmp["tb_subject"].str.contains("其他业务收入").any():
             df_xsz_new.loc[
                 (record['month'], record['vocher_type'], record['vocher_num']),
                 'event'] = "确认其他业务收入"
@@ -69,17 +102,36 @@ def add_event(company_name,start_time,end_time,session,engine,add_suggestion):
 
 
         #处理成本结转
-        if df_tmp["subject_name_1"].str.contains("主营业务成本").any():
+        if df_tmp["tb_subject"].str.contains("主营业务成本").any():
             df_xsz_new.loc[
                 (record['month'], record['vocher_type'], record['vocher_num']),
                 'event'] = "结转主营业务成本"
             continue
 
-        if df_tmp["subject_name_1"].str.contains("其他业务成本").any():
+        if df_tmp["tb_subject"].str.contains("其他业务成本").any():
             df_xsz_new.loc[
                 (record['month'], record['vocher_type'], record['vocher_num']),
                 'event'] = "结转其他业务成本"
             continue
+            
+#         处理应付账款
+        if df_tmp["tb_subject"].str.contains("应付账款").any():
+            if len(df_tmp[(df_tmp["tb_subject"]=="应付账款") &(df_tmp["direction"]=="贷")])>0:
+                raise Exception("应付账款在贷方")
+            auxiliary_strs = df_tmp[df_tmp["tb_subject"]=="应付账款"]["auxiliary"]
+            if len(auxiliary_strs) == 1:
+                auxiliary = parse_auxiliary(auxiliary_strs[0])
+                supplier = auxiliary.get("供应商")
+                if supplier:
+                    nature = get_account_nature(df_xsz, supplier)
+                    df_xsz_new.loc[
+                        (record['month'], record['vocher_type'], record['vocher_num']),
+                        'event'] = "应付账款减少-{}".format(nature)
+                else:
+                    raise Exception("应付账款未进行辅助核算")
+            continue
+
+        
 
 
 
