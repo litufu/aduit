@@ -87,14 +87,15 @@ class Auxiliary(Base):
     code = Column(String)
     name = Column(String)
     direction = Column(String)
-    initial_amount = Column(Numeric(20,4))
-    debit_amount = Column(Numeric(20,4))
-    credit_amount = Column(Numeric(20,4))
-    terminal_amount = Column(Numeric(20,4))
-    initial_num = Column(Numeric(20,4))
-    debit_num = Column(Numeric(20,4))
-    credit_num = Column(Numeric(20,4))
-    terminal_num = Column(Numeric(20,4))
+    initial_amount = Column(Float(20,4))
+    debit_amount = Column(Float(20,4))
+    credit_amount = Column(Float(20,4))
+    terminal_amount = Column(Float(20,4))
+    initial_num = Column(Float(20,4))
+    debit_num = Column(Float(20,4))
+    credit_num = Column(Float(20,4))
+    terminal_num = Column(Float(20,4))
+    nature = Column(String)
 
 # 科目余额表
 # 科目编号	科目名称	科目类别	借贷方向	是否明细科目	科目级次	账面期初数	账面借方发生额	账面贷方发生额	账面期末数

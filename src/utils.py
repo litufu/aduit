@@ -1,4 +1,5 @@
 import pandas as pd
+import re
 import numpy as np
 import json
 from datetime import datetime,date
@@ -246,5 +247,33 @@ def get_tb_origin_value(origin_text,df_km_new,df_xsz_new,):
         return sum_value
     return 0.00
 
+
+def parse_auxiliary(auxiliary_str):
+    '''
+
+    :param auxiliary_str: 辅助核算字符串 "【供应商:惠州乐庭电子线缆有限公司 借 9699.00】"
+    :return: dict {'供应商': '惠州乐庭电子线缆有限公司'}
+    '''
+    if auxiliary_str:
+        res = {}
+        res0 = auxiliary_str.split("【")
+        pattern = re.compile('\s+[借贷].*?】')
+        for i in res0:
+            if i == "":
+                pass
+            else:
+                res1 = re.sub(pattern,"",i.strip())
+                res2 = res1.split(":")
+                res[res2[0]] = res2[1]
+        return res
+
+
+
+
+
+
 if __name__ == '__main__':
-    str_to_float(np.nan)
+    # str_to_float(np.nan)
+
+    str = "【供应商:惠州乐庭电子线缆有限公司 借 9699.00】"
+    parse_auxiliary(str)

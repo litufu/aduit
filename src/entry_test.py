@@ -4,7 +4,92 @@ import pandas as pd
 from datetime import datetime
 from src.database import EntryClassify
 from src.get_tb  import get_new_km_xsz_df
-from src.utils import gen_df_line,  get_session_and_engine
+from src.utils import gen_df_line,  get_session_and_engine,parse_auxiliary
+
+
+def add_event(company_name,start_time,end_time,session,engine,add_suggestion):
+    # 获取科目余额表和序时账
+    df_km, df_xsz = get_new_km_xsz_df(company_name, start_time, end_time, engine, add_suggestion, session)
+    # 为序时账添加一列用来添加业务描述
+    df_std = pd.read_sql_table('subjectcontrast', engine)
+    df_std = df_std[["origin_subject","tb_subject"]]
+    df_xsz = pd.merge(df_xsz,df_std,how="left",left_on="subject_name_1",right_on="origin_subject")
+    df_xsz["tb_subject"].fillna(df_xsz["subject_name_1"],inplace=True)
+    df_xsz["direction"] = df_xsz["debit"].apply(lambda x: "借" if abs(x)>0 else "贷" )
+    df_xsz["event"] = ""
+    # 获取所有的凭证记录
+    df_xsz_record = df_xsz[["month", "vocher_num", "vocher_type"]].drop_duplicates()
+    records = df_xsz_record.to_dict('records')
+    df_xsz_new = df_xsz.copy().set_index(['month', 'vocher_type', 'vocher_num', 'subentry_num'])
+    # 获取每一笔凭证
+    for record in records:
+        df_tmp = df_xsz[(df_xsz["month"] == record["month"])
+                        & (df_xsz["vocher_num"] == record["vocher_num"])
+                        & (df_xsz["vocher_type"] == record["vocher_type"])
+                        ]
+        # 处理本年利润结转凭证
+        if df_tmp["tb_subject"].str.contains("本年利润").any():
+            df_xsz_new.loc[
+                (record['month'], record['vocher_type'], record['vocher_num']),
+                'event'] = "结转本年利润"
+            continue
+        # 处理收入确认凭证
+        if df_tmp["tb_subject"].str.contains("主营业务收入").any():
+            df_xsz_new.loc[
+                (record['month'], record['vocher_type'], record['vocher_num']),
+                'event'] = "确认主营业务收入"
+            continue
+
+        if df_tmp["tb_subject"].str.contains("其他业务收入").any():
+            df_xsz_new.loc[
+                (record['month'], record['vocher_type'], record['vocher_num']),
+                'event'] = "确认其他业务收入"
+            continue
+
+        # 处理应收账款减少
+        if df_tmp["tb_subject"].str.contains("应收账款").any():
+            # 检查应收账款是否在贷方，且贷方仅有应收账款科目
+            if len(df_tmp[(df_tmp["tb_subject"]=="应收账款") & (df_tmp["direction"]=="贷")])==1:
+            #     判断对方科目是否唯一
+                if len(df_tmp[df_tmp["direction"]=="借"])==1:
+                    opposite_subject = df_tmp[df_tmp["direction"]=="借"]["subject_name_1"].values()[0]
+                    df_xsz_new.loc[
+                        (record['month'], record['vocher_type'], record['vocher_num']),
+                        'event'] = "应收账款减少-{}".format(opposite_subject)
+                else:
+                    for obj in gen_df_line(df_tmp[df_tmp["debit"].abs()>0]):
+                        pass
+
+
+        if df_tmp["subject_name_1"].str.contains("其他业务收入").any():
+            df_xsz_new.loc[
+                (record['month'], record['vocher_type'], record['vocher_num']),
+                'event'] = "确认其他业务收入"
+            continue
+
+
+        #处理成本结转
+        if df_tmp["subject_name_1"].str.contains("主营业务成本").any():
+            df_xsz_new.loc[
+                (record['month'], record['vocher_type'], record['vocher_num']),
+                'event'] = "结转主营业务成本"
+            continue
+
+        if df_tmp["subject_name_1"].str.contains("其他业务成本").any():
+            df_xsz_new.loc[
+                (record['month'], record['vocher_type'], record['vocher_num']),
+                'event'] = "结转其他业务成本"
+            continue
+
+
+
+
+
+
+
+
+
+
 
 def analyse_entry(company_name,start_time,end_time,session,engine,add_suggestion):
     # 获取科目余额表和序时账
@@ -188,6 +273,7 @@ if __name__ == '__main__':
     company_name = "深圳市众恒世讯科技股份有限公司"
     start_time = "2016-1-1"
     end_time = "2016-12-31"
-    entry_third_analyse(company_name, start_time, end_time, engine)
+    add_event(company_name, start_time, end_time, session, engine, add_suggestion)
+    # entry_third_analyse(company_name, start_time, end_time, engine)
     # analyse_entry(company_name, start_time, end_time, session, engine, add_suggestion)
     # anylyse_entry_next(company_name, start_time, end_time, session, engine, add_suggestion)

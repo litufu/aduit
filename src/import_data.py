@@ -415,11 +415,11 @@ def check_import_data(company_name,start_time, end_time,engine):
 
 if __name__ == '__main__':
     session,engine  = get_session_and_engine()
-    km_path = './data/zhsx_km.xlsx'
-    xsz_path = './data/zhsx_xsz.xlsx'
-    hs_path = './data/zhsx_hs.xlsx'
+    km_path = '../data/zhsx_km.xlsx'
+    xsz_path = '../data/zhsx_xsz.xlsx'
+    hs_path = '../data/zhsx_hs.xlsx'
     # save_km("深圳市众恒世讯科技股份有限公司", start_time="2016-1-1", end_time="2016-12-31", km_path=km_path,session=session)
     # save_xsz("深圳市众恒世讯科技股份有限公司",start_time="2016-1-1", end_time="2016-12-31",xsz_path=xsz_path,session=session)
-    # save_hs("深圳市众恒世讯科技股份有限公司",start_time="2016-1-1", end_time="2016-12-31",hs_path=hs_path,session=session)
-    check_import_data("深圳市众恒世讯科技股份有限公司",start_time="2016-1-1", end_time="2016-12-31",engine=engine)
+    save_hs("深圳市众恒世讯科技股份有限公司",start_time="2016-1-1", end_time="2016-12-31",hs_path=hs_path,session=session)
+    # check_import_data("深圳市众恒世讯科技股份有限公司",start_time="2016-1-1", end_time="2016-12-31",engine=engine)
 
