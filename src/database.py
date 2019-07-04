@@ -145,6 +145,7 @@ class ChronologicalAccount(Base):
     credit_price = Column(Numeric(20,4))
     auxiliary = Column(String)
 
+# 科目对照表
 class SubjectContrast(Base):
     __tablename__ = 'subjectcontrast'
     id = Column(Integer, primary_key=True)
@@ -156,13 +157,14 @@ class SubjectContrast(Base):
     first_class = Column(String)
     second_class =  Column(String)
 
+# 现金流量表科目比较
 class CashContrast(Base):
     __tablename__ = 'cashcontrast'
     id = Column(Integer, primary_key=True)
     origin_subject = Column(String,unique=True)
     cash_subject = Column(String)
 
-
+# 管理建议
 class Suggestion(Base):
     __tablename__ = 'suggestion'
     id = Column(Integer, primary_key=True)
@@ -183,6 +185,7 @@ class TB(Base):
     amount = Column(Numeric(20,4))
     origin = Column(String)
 
+# 凭证分类
 class EntryClassify(Base):
     __tablename__ = 'entryclassify'
     id = Column(Integer, primary_key=True)
@@ -193,6 +196,48 @@ class EntryClassify(Base):
     desc = Column(String)
     number = Column(Integer)
     records = Column(String)
+
+# 凭证交易或事项描述
+class TransactionEvent(Base):
+    __tablename__ = 'transactionevent'
+    id = Column(Integer, primary_key=True)
+    company_name = Column(String, ForeignKey('company.name'))
+    start_time = Column(DateTime)
+    end_time = Column(DateTime)
+    month = Column(Integer)
+    vocher_type = Column(String)
+    vocher_num = Column(Integer)
+    subentry_num = Column(Integer)
+    desc = Column(String)
+
+# 审计过程问题记录
+class AuditRecord(Base):
+    __tablename__ = 'auditrecord'
+    id = Column(Integer, primary_key=True)
+    company_name = Column(String, ForeignKey('company.name'))
+    start_time = Column(DateTime)
+    end_time = Column(DateTime)
+    problem = Column(String)
+    handle = Column(String)
+
+# 增值税销项税底稿
+class OutputTax(Base):
+    __tablename__ = 'outputtax'
+    id = Column(Integer, primary_key=True)
+    company_name = Column(String, ForeignKey('company.name'))
+    start_time = Column(DateTime)
+    end_time = Column(DateTime)
+    month = Column(Integer)
+    vocher_type = Column(String)
+    vocher_num = Column(Integer)
+    income = Column(Float)
+    tax = Column(Float)
+    tax_rate = Column(Float)
+    expected_tax_rate = Column(Float)
+    difference = Column(Boolean)
+    desc = Column(String)
+
+
 
 
 if __name__ == '__main__':
