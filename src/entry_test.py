@@ -7,7 +7,7 @@ from src.get_tb  import get_new_km_xsz_df
 from src.utils import gen_df_line,  get_session_and_engine,parse_auxiliary
 from settings.constant import inventory,long_term_assets,expense,recognition_income_debit,recognition_income_credit,\
     sale_rate,other_income_rent_desc,notes_receivable_subjects,monetary_funds,inventory_tax,long_term_assets_tax,expense_tax,\
-    payments,receivables,interest_desc,bank_charges_desc,exchange_desc
+    payments,receivables,interest_desc,bank_charges_desc,exchange_desc,salary_desc,salary_collection_subjects
 
 
 
@@ -205,6 +205,51 @@ def aduit_recognition_income(company_name,start_time,end_time,df_one_entry,recor
     session.add(output_tax)
     session.commit()
 
+def get_salary_entry(df_xsz,grades):
+    # 获取未通过职工薪酬核算的凭证
+    # 获取职工薪酬类科目
+    # 有些企业直接支付职工薪酬，未通过职工薪酬核算
+    # 识别未通过职工薪酬核算的职工薪酬
+    # 步骤1：识别应付职工薪酬计提所进入的科目{费用、在建工程、开发支出}
+    # 步骤2：识别所有职工薪酬归集科目所对应的科目中没有应付职工薪酬的凭证
+    # 步骤3：扣除上述步骤外的凭证中含有职工薪酬描述的凭证
+    df_salary_xsz_credit = df_xsz[(df_xsz["tb_subject"] == "应付职工薪酬") & (df_xsz["direction"] == "贷") ]
+    df_salary_xsz_credit_record = df_salary_xsz_credit[["month", "vocher_num", "vocher_type"]].drop_duplicates()
+    # 获取完整借贷方凭证
+    df_salary_xsz_credit_all = pd.merge(df_xsz, df_salary_xsz_credit_record, how="inner",
+                              on=["month", "vocher_num", "vocher_type"])
+    df_salary_xsz_credit_all_debit = df_salary_xsz_credit_all[(df_salary_xsz_credit_all["direction"]=="借")
+                                                       & (df_salary_xsz_credit_all["tb_subject"].isin(salary_collection_subjects))]
+    # 获取所有应付职工薪酬归集的会计科目
+    subject_nums = set([subject_num for subject_num in df_salary_xsz_credit_all_debit["subject_num"]])
+    # 获取所有不包含应付职工薪酬的归集凭证
+    df_xsz_salary_collection = df_xsz[df_xsz["tb_subject"].isin(salary_collection_subjects)]
+    df_xsz_salary_collection_record = df_xsz_salary_collection[["month", "vocher_num", "vocher_type"]].drop_duplicates()
+    df_xsz_salary_collection_all = pd.merge(df_xsz, df_xsz_salary_collection_record, how="inner",
+                                        on=["month", "vocher_num", "vocher_type"])
+    # 去除掉包含应付职工薪酬的凭证
+    df_xsz_salary_collection_all_new = df_xsz_salary_collection_all.append(df_salary_xsz_credit_all)
+    df_xsz_salary_collection_all_new.drop_duplicates(keep=False,inplace=True)
+    # 获取所有序时账归集的科目
+    df_xsz_salary_collection_all_new_record = df_xsz_salary_collection_all_new[["month", "vocher_num", "vocher_type"]].drop_duplicates()
+    records = df_xsz_salary_collection_all_new_record.to_dict('records')
+    # 遍历所有不包含应付职工薪酬的可能归集凭证
+    results = []
+    for record in records:
+        # 获取单笔凭证
+        df_tmp = df_xsz[(df_xsz["month"] == record["month"])
+                        & (df_xsz["vocher_num"] == record["vocher_num"])
+                        & (df_xsz["vocher_type"] == record["vocher_type"])
+                        ]
+        if check_subject_and_desc_contains(df_tmp, salary_desc, grades):
+            res = "{}-{}-{}".format(record["month"],record["vocher_type"],record["vocher_num"])
+            results.append(res)
+    return results
+
+
+
+
+
 def aduit_entry(company_name,start_time,end_time,session,engine,add_suggestion):
     # 获取科目余额表和序时账
     df_km, df_xsz = get_new_km_xsz_df(company_name, start_time, end_time, engine, add_suggestion, session)
@@ -225,6 +270,10 @@ def aduit_entry(company_name,start_time,end_time,session,engine,add_suggestion):
     # 获取每一笔凭证
     start_time = datetime.strptime(start_time, '%Y-%m-%d')
     end_time = datetime.strptime(end_time, '%Y-%m-%d')
+
+    # 获取可能未通过应付职工薪酬核算的职工薪酬项目
+    not_salary_entries = get_salary_entry(df_xsz,grades)
+
 
     for record in records:
         # 获取单笔凭证
@@ -694,37 +743,82 @@ def aduit_entry(company_name,start_time,end_time,session,engine,add_suggestion):
                 )
                 session.add(audit_record)
                 session.commit()
+            continue
 
         # 税金及附加
         if df_tmp["tb_subject"].str.contains("税金及附加").any():
             if len(df_tmp[(df_tmp["tb_subject"]=="税金及附加") &(df_tmp["direction"]=="贷")])>0:
                 raise Exception("税金及附加在贷方")
-            if len(credit_subjects_list) == 1:
-                if credit_subjects_list[0] == "应交税费":
-                    for obj in gen_df_line(df_tmp):
-                        add_event(company_name, start_time, end_time, session, obj["month"], obj["vocher_type"],
-                                  obj["vocher_num"], obj["subentry_num"], "计提税金及附加")
-                elif credit_subjects_list[0] == "银行存款":
-                    for obj in gen_df_line(df_tmp):
-                        add_event(company_name, start_time, end_time, session, obj["month"], obj["vocher_type"],
-                                  obj["vocher_num"], obj["subentry_num"], "支付税金及附加")
+            else:
+                if len(debit_subjects_list)==1:
+                    if len(credit_subjects_list) == 1:
+                        if credit_subjects_list[0] == "应交税费":
+                            for obj in gen_df_line(df_tmp):
+                                add_event(company_name, start_time, end_time, session, obj["month"], obj["vocher_type"],
+                                          obj["vocher_num"], obj["subentry_num"], "计提税金及附加")
+                        elif credit_subjects_list[0] == "银行存款":
+                            for obj in gen_df_line(df_tmp):
+                                add_event(company_name, start_time, end_time, session, obj["month"], obj["vocher_type"],
+                                          obj["vocher_num"], obj["subentry_num"], "支付税金及附加")
+                        else:
+                            pass
                 else:
+                    # 分解分录
                     pass
-            for obj in gen_df_line(df_tmp):
-                add_event(company_name, start_time, end_time, session, obj["month"], obj["vocher_type"],
-                          obj["vocher_num"], obj["subentry_num"], "税金及附加-{}".format(credit_subjects_desc))
-            audit_record = AuditRecord(
-                company_name=company_name,
-                start_time=start_time,
-                end_time=end_time,
-                problem="未识别税金及附加类型，凭证见{}-{}-{}".format(record['month'],
-                                                       record['vocher_type'],
-                                                       record['vocher_num'])
-            )
-            session.add(audit_record)
-            session.commit()
+                for obj in gen_df_line(df_tmp):
+                    add_event(company_name, start_time, end_time, session, obj["month"], obj["vocher_type"],
+                              obj["vocher_num"], obj["subentry_num"], "税金及附加-{}".format(credit_subjects_desc))
+                audit_record = AuditRecord(
+                    company_name=company_name,
+                    start_time=start_time,
+                    end_time=end_time,
+                    problem="未识别税金及附加类型，凭证见{}-{}-{}".format(record['month'],
+                                                           record['vocher_type'],
+                                                           record['vocher_num'])
+                )
+                session.add(audit_record)
+                session.commit()
+            continue
+        # 检查管理费用中是否包含税金，是否应调整为税金及附加如房产税、土地使用税、车船税、印花税
+
+
 
         # 职工薪酬
+        # 应付职工薪酬
+        if df_tmp["tb_subject"].str.contains("应付职工薪酬").any():
+            for obj in gen_df_line(df_tmp):
+                if obj["direction"] == "借":
+                    if obj["tb_subject"] == "应付职工薪酬":
+                        add_event(company_name, start_time, end_time, session, obj["month"], obj["vocher_type"],
+                                  obj["vocher_num"], obj["subentry_num"], "支付职工薪酬")
+                    else:
+                        add_event(company_name, start_time, end_time, session, obj["month"], obj["vocher_type"],
+                                  obj["vocher_num"], obj["subentry_num"], "计提职工薪酬")
+                else:
+                    if obj["tb_subject"] == "应付职工薪酬":
+                        add_event(company_name, start_time, end_time, session, obj["month"], obj["vocher_type"],
+                                  obj["vocher_num"], obj["subentry_num"], "计提职工薪酬")
+                    else:
+                        add_event(company_name, start_time, end_time, session, obj["month"], obj["vocher_type"],
+                                  obj["vocher_num"], obj["subentry_num"], "支付职工薪酬")
+            continue
+#         未通过应付职工薪酬核算的职工薪酬项目
+        if len(not_salary_entries) > 0:
+            add_suggestion(kind="会计处理",
+                           content="存在未通过应付职工薪酬核算的职工薪酬，建议所有职工薪酬项目应经过职工薪酬。如{}".format(not_salary_entries),
+                           start_time=start_time,
+                           end_time=end_time,
+                           company_name=company_name
+                           )
+            res = "{}-{}-{}".format(record["month"], record["vocher_type"], record["vocher_num"])
+            if res in not_salary_entries:
+                for obj in gen_df_line(df_tmp):
+                    add_event(company_name, start_time, end_time, session, obj["month"], obj["vocher_type"],
+                              obj["vocher_num"], obj["subentry_num"], "职工薪酬-未通过应付职工薪酬核算".format(credit_subjects_desc))
+            continue
+
+
+
 
 
 # #         处理应付账款
