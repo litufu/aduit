@@ -197,10 +197,12 @@ class EntryClassify(Base):
     number = Column(Integer)
     records = Column(String)
 
+
 # 凭证交易或事项描述
 class TransactionEvent(Base):
     __tablename__ = 'transactionevent'
     id = Column(Integer, primary_key=True)
+    company_code = Column(String, ForeignKey('company.code'))
     company_name = Column(String, ForeignKey('company.name'))
     start_time = Column(DateTime)
     end_time = Column(DateTime)
@@ -209,6 +211,23 @@ class TransactionEvent(Base):
     vocher_num = Column(Integer)
     subentry_num = Column(Integer)
     desc = Column(String)
+    year = Column(Integer)
+    record_time = Column(DateTime)
+    description = Column(String)
+    subject_num = Column(String)
+    subject_name = Column(String)
+    currency_type = Column(String)
+    debit = Column(Numeric(20, 4))
+    credit = Column(Numeric(20, 4))
+    debit_foreign_currency = Column(Numeric(20, 4))
+    credit_foreign_currency = Column(Numeric(20, 4))
+    debit_number = Column(Numeric(20, 4))
+    credit_number = Column(Numeric(20, 4))
+    debit_price = Column(Numeric(20, 4))
+    credit_price = Column(Numeric(20, 4))
+    auxiliary = Column(String)
+    tb_subject = Column(String)
+    direction = Column(String)
 
 # 审计过程问题记录
 class AuditRecord(Base):

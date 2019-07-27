@@ -5,7 +5,31 @@ from src.utils import gen_df_line,  get_session_and_engine,add_suggestion
 from settings.constant import inventory,long_term_assets,expense
 
 
+def get_nature(df_supplier_xsz):
+    '''
+
+    :param df_supplier_xsz: 供应商凭证借方
+    :return: 供应商属性
+    '''
+    for i in long_term_assets:
+        if df_supplier_xsz["subject_name_1"].str.contains(i).any():
+            return "长期资产"
+    for i in inventory:
+        if df_supplier_xsz["subject_name_1"].str.contains(i).any():
+            return "材料费"
+    for i in expense:
+        if df_supplier_xsz["subject_name_1"].str.contains(i).any():
+            return "费用"
+    return "材料费"
+
 def add_nature(auxiliaries,df_xsz_last,session):
+    '''
+    为供应商添加属性
+    :param auxiliaries: 供应商
+    :param df_xsz_last: 凭证
+    :param session: 数据库session
+    :return:
+    '''
     for auxiliary in auxiliaries:
         df_tmp_xsz = df_xsz_last[(df_xsz_last["auxiliary"].str.contains(auxiliary.name)) & (df_xsz_last["credit"].abs() > 0)]
         if len(df_tmp_xsz) > 0:
@@ -16,21 +40,8 @@ def add_nature(auxiliaries,df_xsz_last,session):
                     (df_xsz_last["vocher_num"] == obj["vocher_num"]) &
                     (df_xsz_last["debit"].abs() > 0)
                     ]
-                for i in long_term_assets:
-                    if df_supplier_xsz["subject_name_1"].str.contains(i).any():
-                        auxiliary.nature = "长期资产"
-                        break
-                for i in inventory:
-                    if df_supplier_xsz["subject_name_1"].str.contains(i).any():
-                        auxiliary.nature = "材料费"
-                        break
-                for i in expense:
-                    if df_supplier_xsz["subject_name_1"].str.contains(i).any():
-                        auxiliary.nature = "费用"
-                        break
+                auxiliary.nature = get_nature(df_supplier_xsz)
                 session.commit()
-
-
 
 def get_account_nature(company_name,start_time,end_time,session,engine,last=False):
     '''
