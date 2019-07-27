@@ -8,7 +8,7 @@ from src.database import EntryClassify,AuditRecord,OutputTax,TransactionEvent
 from src.get_tb  import get_new_km_xsz_df
 from src.utils import gen_df_line,  get_session_and_engine,parse_auxiliary
 from settings.constant import inventory,long_term_assets,expense,recognition_income_debit,recognition_income_credit,\
-    sale_rate,salary_desc,salary_collection_subjects,subject_descs,tax_payable
+    sale_rate,salary_desc,salary_collection_subjects,subject_descs,tax_payable,other_receivable_natures,other_payable_natures
 
 
 
@@ -149,6 +149,9 @@ def add_event(company_name,start_time,end_time,session,desc,obj):
         vocher_num=obj["vocher_num"],
         subentry_num=obj["subentry_num"],
         desc=desc,
+        same_subjects=obj["same_subjects"],
+        opposite_subjects=obj["opposite_subjects"],
+        nature=obj["nature"],
         year=obj["year"],
         record_time=datetime.fromtimestamp(obj["record_time"]/1000),
         description=obj["description"],
@@ -696,7 +699,7 @@ def handle_entry(df_entry,record,subject_descs,grades,start_time, end_time, sess
 
 
 def get_subject_nature(obj,debit_subjects_list,credit_subjects_list,df_entry,grades):
-    if obj["tb_subject"] == "应付账款" or obj["subject"] == "预付款项":
+    if obj["tb_subject"] == "应付账款" or obj["tb_subject"] == "预付款项":
         for i in long_term_assets:
             if i in debit_subjects_list:
                 return "长期资产"
@@ -707,46 +710,46 @@ def get_subject_nature(obj,debit_subjects_list,credit_subjects_list,df_entry,gra
             if i in debit_subjects_list:
                 return "费用"
     elif obj["tb_subject"] == "应交税费":
-        subject_names = [obj["subject_name_{}".format(i)] for i in range(grades)]
+        subject_names = [obj["subject_name_{}".format(i+1)] for i in range(grades)]
         for tax_subject_name in tax_payable:
             if tax_subject_name  in subject_names:
                 return tax_payable[tax_subject_name]
         if "待认证进项税额" in subject_names:
             for i in long_term_assets:
-                if i in debit_subjects_list:
+                if (i in debit_subjects_list) or (i in credit_subjects_list):
                     return "增值税-待认证进项税额-长期资产"
             for i in inventory:
-                if i in debit_subjects_list:
+                if  (i in debit_subjects_list) or (i in credit_subjects_list):
                     return "增值税-待认证进项税额-材料费"
             for i in expense:
-                if i in debit_subjects_list:
+                if (i in debit_subjects_list) or (i in credit_subjects_list):
                     return "增值税-待认证进项税额-费用"
         elif "进项税额" in subject_names:
             for i in long_term_assets:
-                if i in debit_subjects_list:
+                if  (i in debit_subjects_list) or (i in credit_subjects_list):
                     return "增值税-进项税额-长期资产"
             for i in inventory:
-                if i in debit_subjects_list:
+                if  (i in debit_subjects_list) or (i in credit_subjects_list):
                     return "增值税-进项税额-材料费"
             for i in expense:
-                if i in debit_subjects_list:
+                if  (i in debit_subjects_list) or (i in credit_subjects_list):
                     return "增值税-进项税额-费用"
     elif obj["tb_subject"] == "其他应收款":
-
+        for other_receivable_nature in other_receivable_natures:
+            strs = other_receivable_nature["keywords"]
+            nature = other_receivable_nature["contain_event"]
+            if check_subject_and_desc_contains(df_entry, strs, grades):
+                return nature
     elif obj["tb_subject"] == "其他应付款" :
-        pass
-
-
-
-
-
-
-
-
+        for other_payable_nature in other_payable_natures:
+            strs = other_payable_nature["keywords"]
+            nature = other_payable_nature["contain_event"]
+            if check_subject_and_desc_contains(df_entry, strs, grades):
+                return nature
     return ""
 
 
-def add_same_and_opposite_subjects(df_xsz,records):
+def add_same_and_opposite_subjects(df_xsz,records,grades):
     '''
     在序时账中添加对方科目和相同方科目
     :param df_xsz:序时账
@@ -772,19 +775,22 @@ def add_same_and_opposite_subjects(df_xsz,records):
         for obj in gen_df_line(df_entry_debit):
             df_xsz_new.loc[(obj['month'], obj['vocher_type'], obj['vocher_num'], obj['subentry_num']), 'same_subjects'] = json.dumps(debit_subjects_list,ensure_ascii=False)
             df_xsz_new.loc[(obj['month'], obj['vocher_type'], obj['vocher_num'], obj['subentry_num']), 'opposite_subjects'] = json.dumps(credit_subjects_list,ensure_ascii=False)
+            if obj["tb_subject"] in ["其他应收款","其他应付款","应交税费"] :
+                nature = get_subject_nature(obj, debit_subjects_list, credit_subjects_list, df_tmp, grades)
+                df_xsz_new.loc[(obj['month'], obj['vocher_type'], obj['vocher_num'],
+                                obj['subentry_num']), 'nature'] = nature
         for obj in gen_df_line(df_entry_credit):
             df_xsz_new.loc[(obj['month'], obj['vocher_type'], obj['vocher_num'],
                             obj['subentry_num']), 'same_subjects'] = json.dumps(credit_subjects_list, ensure_ascii=False)
             df_xsz_new.loc[(obj['month'], obj['vocher_type'], obj['vocher_num'],
                             obj['subentry_num']), 'opposite_subjects'] = json.dumps(debit_subjects_list,
                                                                                     ensure_ascii=False)
-            if obj["tb_subject"] == "应付账款":
-                if
+            if obj["tb_subject"] in ["应付账款","预付款项","其他应收款","其他应付款","应交税费"] :
+                nature = get_subject_nature(obj, debit_subjects_list, credit_subjects_list, df_tmp, grades)
+                df_xsz_new.loc[(obj['month'], obj['vocher_type'], obj['vocher_num'],
+                                obj['subentry_num']), 'nature'] = nature
 
     return df_xsz_new.reset_index()
-
-
-
 
 def aduit_entry(company_name,start_time,end_time,session,engine,add_suggestion,subject_descs):
     # 获取科目余额表和序时账
@@ -805,7 +811,7 @@ def aduit_entry(company_name,start_time,end_time,session,engine,add_suggestion,s
     df_xsz_record = df_xsz[["month", "vocher_num", "vocher_type"]].drop_duplicates()
     records = df_xsz_record.to_dict('records')
     # 添加相同方向会计科目和对方会计科目
-    df_xsz = add_same_and_opposite_subjects(df_xsz,records)
+    df_xsz = add_same_and_opposite_subjects(df_xsz,records,grades)
 
     # 获取每一笔凭证
     start_time = datetime.strptime(start_time, '%Y-%m-%d')
@@ -1035,8 +1041,8 @@ if __name__ == '__main__':
     # res = split_entry(df_xsz_new)
     # print(res)
 
-    aduit_entry(company_name, start_time, end_time, session, engine, add_suggestion,subject_descs)
-    # cash_flow(company_name, start_time, end_time, session, engine, add_suggestion)
+    # aduit_entry(company_name, start_time, end_time, session, engine, add_suggestion,subject_descs)
+    cash_flow(company_name, start_time, end_time, session, engine, add_suggestion)
     # entry_third_analyse(company_name, start_time, end_time, engine)
     # analyse_entry(company_name, start_time, end_time, session, engine, add_suggestion)
     # anylyse_entry_next(company_name, start_time, end_time, session, engine, add_suggestion)

@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a08b14b0-2eba-4bec-a73a-1e21d2197d88" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/subject_contrast.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/data/subject_contrast.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings/cash_flow_rules.txt" beforeDir="false" afterPath="$PROJECT_DIR$/settings/cash_flow_rules.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings/constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings/constant.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/account_nature.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/account_nature.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/audit.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/src/audit.sqlite" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/database.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entry_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/entry_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/init_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/init_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/xsz_event.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/xsz_event.csv" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +23,7 @@
     <SUITE FILE_PATH="coverage/aduit$constant.coverage" NAME="constant Coverage Results" MODIFIED="1563877644653" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/settings" />
     <SUITE FILE_PATH="coverage/aduit$pytest_for_test_get_tb_test_answer.coverage" NAME="pytest for test_get_tb.test_answer Coverage Results" MODIFIED="1561114815183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/aduit$pytest_for_test_get_tb_test_get_not_exist_subject_names.coverage" NAME="pytest for test_get_tb.test_get_not_exist_subject_names Coverage Results" MODIFIED="1561207717242" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/aduit$entry_test.coverage" NAME="entry_test Coverage Results" MODIFIED="1564135167756" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/aduit$entry_test.coverage" NAME="entry_test Coverage Results" MODIFIED="1564209836984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/aduit$pytest_for_test_company_test_download_company.coverage" NAME="pytest for test_company.test_download_company Coverage Results" MODIFIED="1561191512528" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/aduit$pytest_for_test_4_get_tb_test_check_profit_subject_dirction.coverage" NAME="pytest for test_4_get_tb.test_check_profit_subject_dirction Coverage Results" MODIFIED="1561385393870" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/aduit$init_data.coverage" NAME="init_data Coverage Results" MODIFIED="1563611387492" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
@@ -38,7 +34,7 @@
     <SUITE FILE_PATH="coverage/aduit$pytest_in_test_utils_py.coverage" NAME="pytest in test_utils.py Coverage Results" MODIFIED="1561689799959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/aduit$company.coverage" NAME="company Coverage Results" MODIFIED="1561191696572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/aduit$pytest_in_test_4_get_tb_py.coverage" NAME="pytest in test_4_get_tb.py Coverage Results" MODIFIED="1561446185586" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/aduit$database.coverage" NAME="database Coverage Results" MODIFIED="1563935074953" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/aduit$database.coverage" NAME="database Coverage Results" MODIFIED="1564208906767" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/aduit$utils__1_.coverage" NAME="utils (1) Coverage Results" MODIFIED="1561189400792" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/aduit$account_nature.coverage" NAME="account_nature Coverage Results" MODIFIED="1562063365092" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/aduit$pytest_for_test_utils_test_str_to_float.coverage" NAME="pytest for test_utils.test_str_to_float Coverage Results" MODIFIED="1561188666748" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
@@ -112,7 +108,7 @@
           <entry key="bussiness_description_std" value="282" />
           <entry key="dummy" value="40" />
           <entry key="gitignore" value="7" />
-          <entry key="py" value="72021" />
+          <entry key="py" value="72302" />
           <entry key="theory" value="748" />
           <entry key="txt" value="471" />
         </counts>
@@ -120,25 +116,25 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="1548" />
-          <entry key="Python" value="72021" />
+          <entry key="Python" value="72302" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/entry_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="734" column="12" selection-start-line="734" selection-start-column="8" selection-end-line="734" selection-end-column="12" />
+            <state relative-caret-position="2582">
+              <caret line="752" column="7" lean-forward="true" selection-start-line="752" selection-start-column="7" selection-end-line="752" selection-end-column="7" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
-                <marker date="1564200683646" expanded="true" signature="596:5999" ph="..." />
-                <marker date="1564200683646" expanded="true" signature="1045:3325" ph="..." />
-                <marker date="1564200683646" expanded="true" signature="8610:9423" ph="..." />
-                <marker date="1564200683646" expanded="true" signature="29839:31347" ph="..." />
-                <marker date="1564200683646" expanded="true" signature="31758:33345" ph="..." />
+                <marker date="1564210435567" expanded="true" signature="643:6046" ph="..." />
+                <marker date="1564210435567" expanded="true" signature="1092:3372" ph="..." />
+                <marker date="1564210435567" expanded="true" signature="8783:9596" ph="..." />
+                <marker date="1564210435567" expanded="true" signature="30015:32249" ph="..." />
+                <marker date="1564210435567" expanded="true" signature="32667:34860" ph="..." />
               </folding>
             </state>
           </provider>
@@ -148,7 +144,7 @@
         <entry file="file://$PROJECT_DIR$/src/get_tb.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="114">
-              <caret line="343" column="41" lean-forward="true" selection-start-line="343" selection-start-column="27" selection-end-line="343" selection-end-column="41" />
+              <caret line="343" column="41" selection-start-line="343" selection-start-column="27" selection-end-line="343" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -156,14 +152,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/database.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="199" lean-forward="true" selection-start-line="199" selection-end-line="199" />
+            <state relative-caret-position="121">
+              <caret line="208" column="27" selection-start-line="215" selection-start-column="4" selection-end-line="215" selection-end-column="10" />
               <folding>
                 <element signature="e#24#120#0" expanded="true" />
-                <marker date="1564133894797" expanded="true" signature="534:737" ph="..." />
-                <marker date="1564133894797" expanded="true" signature="5956:8193" ph="..." />
-                <marker date="1564133894797" expanded="true" signature="6318:7382" ph="..." />
-                <marker date="1564133894797" expanded="true" signature="7714:8193" ph="..." />
+                <marker date="1564208766722" expanded="true" signature="534:737" ph="..." />
+                <marker date="1564208766722" expanded="true" signature="5956:8295" ph="..." />
+                <marker date="1564208766722" expanded="true" signature="6318:7484" ph="..." />
+                <marker date="1564208766722" expanded="true" signature="7816:8295" ph="..." />
               </folding>
             </state>
           </provider>
@@ -178,11 +174,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/settings/constant.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="1100" column="47" lean-forward="true" selection-start-line="1100" selection-start-column="47" selection-end-line="1100" selection-end-column="47" />
+            <state relative-caret-position="95">
+              <caret line="5" column="129" selection-start-line="5" selection-start-column="129" selection-end-line="5" selection-end-column="129" />
             </state>
           </provider>
         </entry>
@@ -198,14 +194,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>应付利息</find>
-      <find>交易性金融资产</find>
-      <find>合同资产</find>
       <find>应收票据减少</find>
       <find>租赁</find>
       <find>营业外收入</find>
       <find>递延收益</find>
-      <find>其他应付款</find>
       <find>主营业务成本</find>
       <find>应收账款</find>
       <find>股本</find>
@@ -224,10 +216,14 @@
       <find>.at</find>
       <find>df_xsz_new</find>
       <find>get_supplier_nature</find>
-      <find>reset</find>
       <find>应付账款</find>
       <find>grades</find>
+      <find>contain</find>
       <find>其他应收款</find>
+      <find>reset</find>
+      <find>df_entry</find>
+      <find>进项税</find>
+      <find>其他应付款</find>
     </findStrings>
     <replaceStrings>
       <replace>df_xsz</replace>
@@ -283,8 +279,8 @@
         <option value="$PROJECT_DIR$/src/account_nature.py" />
         <option value="$PROJECT_DIR$/settings/cash_flow_rules.txt" />
         <option value="$PROJECT_DIR$/src/database.py" />
-        <option value="$PROJECT_DIR$/settings/constant.py" />
         <option value="$PROJECT_DIR$/src/entry_test.py" />
+        <option value="$PROJECT_DIR$/settings/constant.py" />
       </list>
     </option>
   </component>
@@ -556,8 +552,8 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3286119" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39943343" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
@@ -608,257 +604,257 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>835</line>
+          <line>841</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>656</line>
+          <line>659</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>658</line>
+          <line>661</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>661</line>
+          <line>664</line>
           <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>666</line>
+          <line>669</line>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>672</line>
+          <line>675</line>
           <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>674</line>
+          <line>677</line>
           <option name="timeStamp" value="59" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>677</line>
+          <line>680</line>
           <option name="timeStamp" value="60" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>680</line>
+          <line>683</line>
           <option name="timeStamp" value="61" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>630</line>
+          <line>633</line>
           <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>634</line>
+          <line>637</line>
           <option name="timeStamp" value="68" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>573</line>
+          <line>576</line>
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>574</line>
+          <line>577</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>576</line>
+          <line>579</line>
           <option name="timeStamp" value="71" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>575</line>
+          <line>578</line>
           <option name="timeStamp" value="72" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>578</line>
+          <line>581</line>
           <option name="timeStamp" value="73" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>579</line>
+          <line>582</line>
           <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>577</line>
+          <line>580</line>
           <option name="timeStamp" value="75" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>580</line>
+          <line>583</line>
           <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>582</line>
+          <line>585</line>
           <option name="timeStamp" value="77" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>584</line>
+          <line>587</line>
           <option name="timeStamp" value="78" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>583</line>
+          <line>586</line>
           <option name="timeStamp" value="79" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>585</line>
+          <line>588</line>
           <option name="timeStamp" value="80" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>586</line>
+          <line>589</line>
           <option name="timeStamp" value="81" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>587</line>
+          <line>590</line>
           <option name="timeStamp" value="82" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>550</line>
+          <line>553</line>
           <option name="timeStamp" value="83" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>552</line>
+          <line>555</line>
           <option name="timeStamp" value="84" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>553</line>
+          <line>556</line>
           <option name="timeStamp" value="85" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>554</line>
+          <line>557</line>
           <option name="timeStamp" value="86" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>555</line>
+          <line>558</line>
           <option name="timeStamp" value="87" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>556</line>
+          <line>559</line>
           <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>557</line>
+          <line>560</line>
           <option name="timeStamp" value="89" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>558</line>
+          <line>561</line>
           <option name="timeStamp" value="90" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>562</line>
+          <line>565</line>
           <option name="timeStamp" value="92" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>559</line>
+          <line>562</line>
           <option name="timeStamp" value="93" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>564</line>
+          <line>567</line>
           <option name="timeStamp" value="95" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>566</line>
+          <line>569</line>
           <option name="timeStamp" value="96" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>569</line>
+          <line>572</line>
           <option name="timeStamp" value="97" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>525</line>
+          <line>528</line>
           <option name="timeStamp" value="104" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>524</line>
+          <line>527</line>
           <option name="timeStamp" value="105" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>526</line>
+          <line>529</line>
           <option name="timeStamp" value="106" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>528</line>
+          <line>531</line>
           <option name="timeStamp" value="107" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>529</line>
+          <line>532</line>
           <option name="timeStamp" value="108" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>530</line>
+          <line>533</line>
           <option name="timeStamp" value="109" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>531</line>
+          <line>534</line>
           <option name="timeStamp" value="112" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>533</line>
+          <line>536</line>
           <option name="timeStamp" value="113" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>536</line>
+          <line>539</line>
           <option name="timeStamp" value="114" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>478</line>
+          <line>481</line>
           <option name="timeStamp" value="124" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>484</line>
+          <line>487</line>
           <option name="timeStamp" value="127" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>485</line>
+          <line>488</line>
           <option name="timeStamp" value="128" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
-          <line>624</line>
+          <line>627</line>
           <option name="timeStamp" value="181" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -895,6 +891,11 @@
           <url>file://$PROJECT_DIR$/src/entry_test.py</url>
           <line>95</line>
           <option name="timeStamp" value="201" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/entry_test.py</url>
+          <line>816</line>
+          <option name="timeStamp" value="204" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1184,24 +1185,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/get_tb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="343" column="41" selection-start-line="343" selection-start-column="27" selection-end-line="343" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/database.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="199" lean-forward="true" selection-start-line="199" selection-end-line="199" />
+        <state relative-caret-position="121">
+          <caret line="208" column="27" selection-start-line="215" selection-start-column="4" selection-end-line="215" selection-end-column="10" />
           <folding>
             <element signature="e#24#120#0" expanded="true" />
-            <marker date="1564133894797" expanded="true" signature="534:737" ph="..." />
-            <marker date="1564133894797" expanded="true" signature="5956:8193" ph="..." />
-            <marker date="1564133894797" expanded="true" signature="6318:7382" ph="..." />
-            <marker date="1564133894797" expanded="true" signature="7714:8193" ph="..." />
+            <marker date="1564208766722" expanded="true" signature="534:737" ph="..." />
+            <marker date="1564208766722" expanded="true" signature="5956:8295" ph="..." />
+            <marker date="1564208766722" expanded="true" signature="6318:7484" ph="..." />
+            <marker date="1564208766722" expanded="true" signature="7816:8295" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/get_tb.py">
+    <entry file="file://$PROJECT_DIR$/src/entry_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="343" column="41" lean-forward="true" selection-start-line="343" selection-start-column="27" selection-end-line="343" selection-end-column="41" />
+        <state relative-caret-position="2582">
+          <caret line="752" column="7" lean-forward="true" selection-start-line="752" selection-start-column="7" selection-end-line="752" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+            <marker date="1564210435567" expanded="true" signature="643:6046" ph="..." />
+            <marker date="1564210435567" expanded="true" signature="1092:3372" ph="..." />
+            <marker date="1564210435567" expanded="true" signature="8783:9596" ph="..." />
+            <marker date="1564210435567" expanded="true" signature="30015:32249" ph="..." />
+            <marker date="1564210435567" expanded="true" signature="32667:34860" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1214,23 +1230,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/settings/constant.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="1100" column="47" lean-forward="true" selection-start-line="1100" selection-start-column="47" selection-end-line="1100" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entry_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="734" column="12" selection-start-line="734" selection-start-column="8" selection-end-line="734" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-            <marker date="1564200683646" expanded="true" signature="596:5999" ph="..." />
-            <marker date="1564200683646" expanded="true" signature="1045:3325" ph="..." />
-            <marker date="1564200683646" expanded="true" signature="8610:9423" ph="..." />
-            <marker date="1564200683646" expanded="true" signature="29839:31347" ph="..." />
-            <marker date="1564200683646" expanded="true" signature="31758:33345" ph="..." />
-          </folding>
+        <state relative-caret-position="95">
+          <caret line="5" column="129" selection-start-line="5" selection-start-column="129" selection-end-line="5" selection-end-column="129" />
         </state>
       </provider>
     </entry>
